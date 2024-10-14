@@ -14,11 +14,11 @@ export function NoteIndex() {
     noteService.query().then(setNotes)
   }
   function onRemoveNote(noteId) {
-    noteServiceService
+    noteService
       .remove(noteId)
       .then(() => {
-        setBooks((notes) => notes.filter((note) => note.id !== noteId))
-        showSuccessMsg('Book removed successfully')
+        setNotes((notes) => notes.filter((note) => note.id !== noteId))
+        // showSuccessMsg('Book removed successfully')
       })
       .catch((err) => {
         console.log('Problems removing book:', err)
