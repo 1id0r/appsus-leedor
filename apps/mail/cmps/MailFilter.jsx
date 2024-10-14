@@ -17,12 +17,10 @@ export function MailFilter({filterBy, onSetFilter}) {
             case 'range':
                 value = +value
                 break;
-
             case 'checkbox':
                 value = target.checked
                 break
         }
-
         setFilterByToEdit(prevFilter => ({ ...prevFilter, [field]: value }))
     }
 

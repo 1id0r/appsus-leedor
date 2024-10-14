@@ -106,3 +106,28 @@ function getMonthName(date) {
   ]
   return monthNames[date.getMonth()]
 }
+
+function saveToStorage(key, value) {
+  localStorage.setItem(key, JSON.stringify(value))
+}
+
+function loadFromStorage(key) {
+  const data = localStorage.getItem(key)
+  return (data) ? JSON.parse(data) : undefined
+}
+
+function getRandomTimestamp(){
+  const now = new Date();
+    
+  // Get the first day of the current month
+  const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+  
+  // Get the last day of the current month
+  const endOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+  
+  // Generate a random timestamp between start and end of the month
+  const randomMillis = Math.floor(Math.random() * (endOfMonth.getTime() - startOfMonth.getTime() + 1)) + startOfMonth.getTime();
+  
+  // Return the random timestamp (in milliseconds)
+  return randomMillis
+}
