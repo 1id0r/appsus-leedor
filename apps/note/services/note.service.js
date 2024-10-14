@@ -1,5 +1,5 @@
-import { storageService } from '../../../services/async-storage.service'
-import { storageService } from '../../../services/storage.service'
+import { utilService } from '../../../services/util.service.js'
+import { storageService } from '../../../services/async-storage.service.js'
 
 const NOTE_KEY = 'noteDB'
 _createNotes()
@@ -11,13 +11,11 @@ export const noteService = {
   getEmptyNote,
 }
 
-function query(filterBy = {}) {
+function query() {
   return storageService.query(NOTE_KEY).then((notes) => {
-    // Optional: Filter logic based on `filterBy`
     return notes
   })
 }
-
 function get(noteId) {
   return storageService.get(NOTE_KEY, noteId)
 }
@@ -39,7 +37,7 @@ function getEmptyNote() {
 }
 
 function _createNotes() {
-  let notes = loadFromStoarge(NOTE_KEY)
+  let notes = utilService.loadFromStorage(NOTE_KEY)
   if (!notes || !notes.length) {
     const notes = [
       {
@@ -54,7 +52,31 @@ function _createNotes() {
           txt: 'Fullstack Me Baby!',
         },
       },
+      {
+        id: 'n102',
+        createdAt: 1112222,
+        type: 'NoteTxt',
+        isPinned: true,
+        style: {
+          backgroundColor: '#00d',
+        },
+        info: {
+          txt: 'Fullstack Me Baby!',
+        },
+      },
+      {
+        id: 'n103',
+        createdAt: 1112222,
+        type: 'NoteTxt',
+        isPinned: true,
+        style: {
+          backgroundColor: '#00d',
+        },
+        info: {
+          txt: 'Fullstack Me Baby!',
+        },
+      },
     ]
-    saveToStorage(NOTE_KEY, notes)
+    utilService.saveToStorage(NOTE_KEY, notes)
   }
 }

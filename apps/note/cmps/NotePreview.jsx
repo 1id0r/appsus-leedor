@@ -1,3 +1,3 @@
-export function NotePreview() {
-  return <h2>hello</h2>
+export function NotePreview({ note }) {
+  return <h2>{note.info.txt}</h2>
 }

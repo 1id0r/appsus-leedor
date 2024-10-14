@@ -20,5 +20,5 @@
 
 @import './cmps/UserMsg.css';
 @import './cmps/AppHeader.css';
-
+@import url('./apps/note/cmps/NoteList.css');
 /* @import './apps/mail/cmps/MailList.css'; */
