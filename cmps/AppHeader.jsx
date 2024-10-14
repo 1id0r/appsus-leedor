@@ -11,7 +11,6 @@ export function AppHeader() {
         <NavLink to='/about'>About</NavLink>
         <NavLink to='/mail'>Mail</NavLink>
         <NavLink to='/note'>Note</NavLink>
-        <h2>hey lee</h2>
       </nav>
     </header>
   )
