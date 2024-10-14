@@ -1,0 +1,35 @@
+.mail-preview{
+    display: flex;
+    justify-content: space-between;
+
+    height: 20px;
+
+    padding: 10px;
+    border: 1px solid gray 
+}
+
+.mail-preview.read{
+    background-color: rgba(0, 0, 0, 0.2);
+}
+.mail-preview.read .preview-content h4{
+    font-weight: 200;
+}
+.mail-preview.unread{
+    background-color: rgba(0, 0, 0, 0);
+
+}
+
+.mail-preview p{
+    margin: 0;
+}
+
+.mail-preview .preview-content{
+    display: flex;
+    justify-content: space-between;
+
+    gap: 1em;
+
+    width: 60%;
+    font-weight: 200;
+}
+

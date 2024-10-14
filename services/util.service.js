@@ -6,6 +6,9 @@ export const utilService = {
     padNum,
     getDayName,
     getMonthName,
+    getRandomTimestamp,
+    loadFromStorage,
+    saveToStorage
 }
 
 function makeId(length = 6) {
@@ -59,4 +62,20 @@ function getMonthName(date) {
         "July", "August", "September", "October", "November", "December"
     ]
     return monthNames[date.getMonth()]
+}
+
+function getRandomTimestamp(days) {
+    const now = Date.now()
+    const randomDays = Math.floor(Math.random() * days)
+    const randomTimestamp = now - randomDays * 24 * 60 * 60 * 100
+    return randomTimestamp
+}
+
+function saveToStorage(key, val) {
+    localStorage.setItem(key, JSON.stringify(val))
+}
+
+function loadFromStorage(key) {
+    var val = localStorage.getItem(key)
+    return JSON.parse(val)
 }

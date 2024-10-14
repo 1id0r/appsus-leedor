@@ -6,7 +6,7 @@ import { About } from "./pages/About.jsx"
 import { Home } from "./pages/Home.jsx"
 import { MailIndex } from "./apps/mail/pages/MailIndex.jsx"
 import { MailDetails } from "./apps/mail/pages/MailDetails.jsx"
-import { MailCompose } from "./apps/mail/cmps/MailCompose.jsx"
+import { MailCompose } from "./apps/mail/pages/MailCompose.jsx"
 import { NoteIndex } from "./apps/note/pages/NoteIndex.jsx"
 
 

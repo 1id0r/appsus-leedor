@@ -1,9 +1,13 @@
 
-export function MailFolderList() {
+export function MailFolderList({unreadCount}) {
 
     return (
         <section className="Mail-folder-list">
-            folders List...
+            <p>Inbox {unreadCount}</p>
+            <p>Starred</p>
+            <p>Sent</p>
+            <p>Draft</p>
+            <p>Trash</p>
         </section>
     )
 }

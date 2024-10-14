@@ -11,14 +11,25 @@
 
 /* Pages */
 @import './pages/home.css';
+@import './pages/about.css';
 
-/* @import './apps/note/pages/NoteIndex.css'; */
 
-/* @import './apps/mail/pages/MailIndex.css'; */
 
 /* Cmps */
 
 @import './cmps/UserMsg.css';
 @import './cmps/AppHeader.css';
 
-/* @import './apps/mail/cmps/MailList.css'; */
+/* Mail-app */
+@import './apps/mail/pages/mail-index.css';
+@import './apps/mail/pages/mail-details.css';
+@import './apps/mail/pages/mail-compose.css';
+/* Mail-app Cmps */
+@import './apps/mail/cmps/mail-list.css';
+@import './apps/mail/cmps/mail-preview.css';
+
+
+/* Note-app */
+@import './apps/note/pages/note-index.css';
+/* Mail-app Cmps */
+@import './apps/note/cmps/note-list.css';
