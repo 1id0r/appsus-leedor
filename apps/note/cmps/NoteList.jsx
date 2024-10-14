@@ -1,3 +1,5 @@
+import { NotePreview } from './NotePreview.jsx'
+
 export function NoteList() {
-    return <div>note list</div>
+  return <NotePreview />
 }
