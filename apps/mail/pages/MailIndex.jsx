@@ -7,6 +7,7 @@ import { MailList } from "../cmps/MailList.jsx";
 
 export function MailIndex() {
     return <div>mail app
+        <h4>Hey</h4>
         <MailFilter/>
         <MailFolderList/>
         <MailList/>

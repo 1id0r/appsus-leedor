@@ -86,14 +86,14 @@ function _createMails() {
     let mails = loadFromStorage(MAIL_KEY)
     if (!mails || !mails.length) {
         mails = [
-            _createmail('audu', 300),
+            _createMail(),
         ]
         saveToStorage(MAIL_KEY, mails)
     }
 }
 
-function _createMail(vendor, speed = 250) {
-    const mail = getEmptyMail(vendor, speed)
+function _createMail() {
+    const mail = getEmptyMail()
     mail.id = makeId()
     return mail
 }
