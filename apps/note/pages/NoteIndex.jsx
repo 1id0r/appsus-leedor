@@ -8,6 +8,7 @@ import { NoteAdd } from '../cmps/NoteAdd.jsx'
 export function NoteIndex() {
   const [notes, setNotes] = useState()
   const [filterBy, setFilterBy] = useState(noteService.getDefaultFilter())
+
   useEffect(() => {
     loadNotes()
     console.log(notes)
@@ -38,7 +39,7 @@ export function NoteIndex() {
   return (
     <React.Fragment>
       <NoteFilter filterBy={filterBy} onSetFilter={onSetFilter} />
-      <NoteAdd />
+      <NoteAdd loadNotes={loadNotes} />
       <NoteList onRemoveNote={onRemoveNote} notes={notes} />
     </React.Fragment>
   )

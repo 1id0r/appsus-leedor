@@ -12,5 +12,5 @@
      flex-direction: column;
      justify-content: space-around;
      align-items: center;
-     background-color: var(--clr1bg);
+     border: 1px solid black;
  }

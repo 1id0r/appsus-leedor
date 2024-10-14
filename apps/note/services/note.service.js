@@ -50,8 +50,8 @@ function getEmptyNote() {
     createdAt: '',
     type: 'NoteTxt',
     isPinned: '',
-    style: { backgroundColor: '#00d' },
-    info: { title: '', txt: '' },
+    style: { backgroundColor: 'grey' },
+    info: { title: '', txt: '', url: '', todos: [] },
   }
 }
 
@@ -65,7 +65,7 @@ function _createNotes() {
         type: 'NoteTxt',
         isPinned: true,
         style: {
-          backgroundColor: '#00d',
+          backgroundColor: 'grey',
         },
         info: {
           title: '1',
@@ -78,7 +78,7 @@ function _createNotes() {
         type: 'NoteTxt',
         isPinned: true,
         style: {
-          backgroundColor: '#00d',
+          backgroundColor: 'grey',
         },
         info: {
           title: '1',
@@ -91,11 +91,37 @@ function _createNotes() {
         type: 'NoteTxt',
         isPinned: true,
         style: {
-          backgroundColor: '#00d',
+          backgroundColor: 'grey',
         },
         info: {
           title: '1',
           txt: 'Fullstack Me Baby!',
+        },
+      },
+      {
+        id: 'n103',
+        createdAt: 1112222,
+        type: 'NoteVideo',
+        isPinned: true,
+        style: {
+          backgroundColor: 'grey',
+        },
+        info: {
+          title: '1',
+          url: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+        },
+      },
+      {
+        id: 'n103',
+        createdAt: 1112222,
+        type: 'NoteImg',
+        isPinned: true,
+        style: {
+          backgroundColor: 'grey',
+        },
+        info: {
+          title: '1',
+          url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQfc4OHjLhcAzoGtn7Tw-ywGG_Wb-w3e4rjQ&s',
         },
       },
     ]
