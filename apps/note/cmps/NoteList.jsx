@@ -9,7 +9,7 @@ export function NoteList({ notes, onRemoveNote }) {
     // <h2>hello</h2>
     <ul className='note-list'>
       {notes.map((note) => (
-        <li key={note.id}>
+        <li key={note.id} style={{ backgroundColor: note.style.backgroundColor }}>
           <NotePreview note={note} />
           <section>
             <button onClick={() => onRemoveNote(note.id)}>Remove</button>
