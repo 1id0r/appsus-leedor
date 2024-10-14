@@ -12,12 +12,24 @@ export function NoteList({ notes, onRemoveNote, onTogglePin }) {
     <li key={note.id} style={{ backgroundColor: note.style.backgroundColor }}>
       <NotePreview note={note} />
       <section className='note-actions'>
-        <button onClick={() => onRemoveNote(note.id)}>Remove</button>
-        <button onClick={() => onTogglePin(note.id)}>{note.isPinned ? 'Unpin' : 'Pin'}</button>
+        <button onClick={() => onRemoveNote(note.id)}>
+          {' '}
+          <img src='assets/img/delete.svg' alt='edit' />
+        </button>
         <Link to={`/note/edit/${note.id}`}>
-          <button>Edit</button>
+          <button>
+            <img src='assets/img/edit.svg' alt='edit' />
+          </button>
         </Link>
+        <section></section>
       </section>
+      <button className='pin-btn' onClick={() => onTogglePin(note.id)}>
+        {note.isPinned ? (
+          <img src='assets/img/notpinned.svg' alt='not pinned' />
+        ) : (
+          <img src='assets/img/pinned.svg' alt='pinned' />
+        )}
+      </button>
     </li>
   )
 

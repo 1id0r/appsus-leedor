@@ -1,3 +1,8 @@
+ .note-list-container {
+     margin: 0 auto;
+     padding: 20px;
+ }
+
  .note-list {
      list-style: none;
      padding: 15px 0 0;
@@ -15,31 +20,46 @@
 
  }
 
- .note-list-container {
-     max-width: 800px;
-     margin: 0 auto;
-     padding: 20px;
- }
+
 
  .note-list li {
      border-radius: 8px;
      overflow: hidden;
      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+     position: relative;
  }
 
- h2 {
+ /* h2 {
      font-size: 24px;
      margin-bottom: 15px;
      color: #333;
+     position: absolute;
+     top: 8px;
+     left: 15px;
+ } */
+
+ .note-actions button {
+     background-color: transparent;
+     border: none;
+     cursor: pointer;
+     font-size: 14px;
+     color: #555;
  }
 
- /* General styles */
- /* body {
-     font-family: Arial, sans-serif;
-     background-color: #f0f0f0;
+ .pin-btn {
+     background-color: transparent;
+     border: none;
+     cursor: pointer;
+     font-size: 14px;
+     position: absolute;
+     top: 8px;
+     right: 8px;
+     font-size: 1.2em;
+     cursor: pointer;
  }
 
 
+ /*
 
  .note-list {
      display: flex;

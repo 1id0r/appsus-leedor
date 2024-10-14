@@ -50,50 +50,7 @@ export function NoteAdd({ loadNotes }) {
   function handleTypeChange(newType) {
     setNoteToAdd((prevNote) => ({ ...prevNote, type: newType }))
   }
-  function renderInputField() {
-    switch (noteToAdd.type) {
-      case 'NoteImg':
-        return (
-          <input
-            type='text'
-            placeholder='Enter image URL...'
-            name='url'
-            value={noteToAdd.info.url || ''}
-            onChange={handleChange}
-          />
-        )
-      case 'NoteVideo':
-        return (
-          <input
-            type='text'
-            placeholder='Enter video URL...'
-            name='url'
-            value={noteToAdd.info.url || ''}
-            onChange={handleChange}
-          />
-        )
-      case 'NoteAudio':
-        return (
-          <input
-            type='text'
-            placeholder='Enter audio URL...'
-            name='url'
-            value={noteToAdd.info.url || ''}
-            onChange={handleChange}
-          />
-        )
-      default:
-        return (
-          <input
-            type='text'
-            placeholder='Enter text...'
-            name='txt'
-            value={noteToAdd.info.txt || ''}
-            onChange={handleChange}
-          />
-        )
-    }
-  }
+
   function togglePin() {
     setNoteToAdd((prevNote) => ({ ...prevNote, isPinned: !prevNote.isPinned }))
   }
@@ -105,7 +62,7 @@ export function NoteAdd({ loadNotes }) {
           <input type='text' placeholder='Title' name='title' value={noteToAdd.info.title} onChange={handleChange} />
           <input
             type='text'
-            placeholder={noteToAdd.type === 'NoteImg' ? 'Enter img url...' : 'Take a note...'}
+            placeholder={noteToAdd.type === 'NoteTxt' ? 'Take a note...' : 'Enter url...'}
             name={noteToAdd.type === 'NoteImg' ? 'url' : 'txt'}
             value={noteToAdd.type === 'NoteImg' ? noteToAdd.info.url : noteToAdd.info.txt}
             onChange={handleChange}
@@ -114,13 +71,13 @@ export function NoteAdd({ loadNotes }) {
         <div className='note-add-actions'>
           <div className='note-type-buttons'>
             <button type='button' onClick={() => handleTypeChange('NoteTxt')}>
-              🅰️
+              <img src='assets/img/text.svg' alt='text' />
             </button>
             <button type='button' onClick={() => handleTypeChange('NoteImg')}>
-              <img src='assets/img/image.svg' alt='' />
+              <img src='assets/img/image.svg' alt='video' />
             </button>
             <button type='button' onClick={() => handleTypeChange('NoteVideo')}>
-              🎥
+              <img src='assets/img/movie.svg' alt='video' />
             </button>
           </div>
           <button type='submit' className='save-button'>
@@ -128,7 +85,11 @@ export function NoteAdd({ loadNotes }) {
           </button>
         </div>
         <button type='button' className={`pin-button ${noteToAdd.isPinned ? 'pinned' : ''}`} onClick={togglePin}>
-          {noteToAdd.isPinned ? '📌' : '🔽'}
+          {noteToAdd.isPinned ? (
+            <img src='assets/img/pinned.svg' alt='pinned' />
+          ) : (
+            <img src='assets/img/notpinned.svg' alt='not pinned' />
+          )}
         </button>
       </form>
     </section>

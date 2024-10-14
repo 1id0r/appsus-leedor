@@ -56,18 +56,25 @@ export function NoteEdit() {
         console.log('err:', err)
       })
   }
+  function onBack() {
+    navigate('/note')
+  }
 
   return (
-    <section className='note-edit'>
-      <h3>{noteId ? 'Edit' : 'Add'} Note</h3>
-      <form onSubmit={onSaveNote}>
-        <label htmlFor='title'>title:</label>
-        <input type='text' name='title' value={noteToEdit.info.title || ''} onChange={handleChange} />
-        <label htmlFor='text'>text:</label>
-        <input type='text' name='txt' value={noteToEdit.info.txt || ''} onChange={handleChange} />
+    <React.Fragment>
+      <div className='back-drop' onClick={onBack}>
+        <div className='note-edit'>
+          <h3>{noteId ? 'Edit' : 'Add'} Note</h3>
+          <form onSubmit={onSaveNote}>
+            <label htmlFor='title'>title:</label>
+            <input type='text' name='title' value={noteToEdit.info.title || ''} onChange={handleChange} />
+            <label htmlFor='text'>text:</label>
+            <input type='text' name='txt' value={noteToEdit.info.txt || ''} onChange={handleChange} />
 
-        <button>Save</button>
-      </form>
-    </section>
+            <button className='edit-btn'>Save</button>
+          </form>
+        </div>
+      </div>
+    </React.Fragment>
   )
 }

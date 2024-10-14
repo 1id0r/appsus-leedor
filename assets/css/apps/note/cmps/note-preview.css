@@ -1,4 +1,44 @@
 video {
-    max-width: 150px;
     background-color: grey;
+    /* display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; */
+}
+
+.note-preview {
+    position: relative;
+    padding: 16px;
+    border-radius: 8px;
+    width: 200px;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: top;
+    align-items: left;
+}
+
+.note-preview video {
+    position: relative;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h2.note-title {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #333;
+    position: absolute;
+    top: 8px;
+    left: 20px;
+}
+
+p.note-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: left;
 }

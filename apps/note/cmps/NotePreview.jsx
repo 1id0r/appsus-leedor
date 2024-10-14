@@ -2,7 +2,7 @@ export function NotePreview({ note }) {
   function renderNoteContent() {
     switch (note.type) {
       case 'NoteTxt':
-        return <p>{note.info.txt}</p>
+        return <p className='note-text'>{note.info.txt}</p>
       case 'NoteImg':
         return <img src={note.info.url} alt={note.info.title} />
       case 'NoteVideo':
@@ -26,7 +26,7 @@ export function NotePreview({ note }) {
 
   return (
     <div className='note-preview'>
-      <h2>{note.info.title}</h2>
+      <h2 className='note-title'>{note.info.title}</h2>
       {renderNoteContent()}
     </div>
   )
