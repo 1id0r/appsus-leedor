@@ -1,5 +1,38 @@
  /* mail list */
 
- .mail-list{
+ .mail-list {
     list-style: none;
+    padding: 0;
+    width: 100%;
+ }
+
+ li.mail{
+   display: flex;
+   justify-content: space-between;
+
+   height: 20px;
+
+   padding: 10px;
+   border: 1px solid rgba(128, 128, 128, 0.357);
+   border-block-end: 0;
+}
+
+li.mail.read{
+   background-color:var(--mail-read-color);
+}
+li.mail.read .mail-preview h4{
+   font-weight: 200;
+}
+li.mail.unread{
+   background-color:var(--mail-unread-color);
+}
+
+ .mail-list li button {
+   display: none;
+   background: none;
+   border: none;
+ }
+
+ .mail-list li:hover button {
+   display: inline;
  }

@@ -13,8 +13,8 @@ export function MailList({ mails, onRemoveMail, onToggleRead }) {
                     </div>
                     <MailPreview mail={mail}/>
                     <div>
-                        <button onClick={() => { onRemoveMail(mail.id) }}>Delete</button>
-                        <button onClick={() => { onToggleRead(mail)}}>Mark as {!mail.isRead ? 'Read' : 'Unread'}</button>
+                        <button onClick={() => { onRemoveMail(mail.id) }}>🗑️</button>
+                        <button onClick={() => { onToggleRead(mail)}}>{!mail.isRead ? '📨' : '✉️'}</button>
                     </div>
                 </li>
             )}

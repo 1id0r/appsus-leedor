@@ -1,1 +1,31 @@
- /* mail index  */
+.mail-main{
+    display: flex;
+    background-color: var(--main-mail-bg-color);
+}
+
+.mail-folders{
+    width: 256px;
+}
+
+.side-nav{
+    width: 59px; 
+}
+
+.mail-content{
+    width: 100%;
+}
+
+.mail-main .mail-folders a{
+    display: block;
+    width: 118px ;
+    height: 56px;
+    padding-inline-end: 24px;
+    font-size: 14px;
+    line-height: 32px;
+    text-align: center;
+
+    background-color: var( --mail-compose-color);
+    border-radius: 1em;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+    margin-inline-start: 8px;
+}

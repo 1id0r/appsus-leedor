@@ -21,7 +21,7 @@ export function MailIndex() {
 
     function loadMails() {
         mailService.query(filterBy)
-            .then(mails=>{
+            .then(mails => {
                 setMails(mails)
                 loadStats(mails)
             })
@@ -31,7 +31,7 @@ export function MailIndex() {
 
     }
 
-    function loadStats(mails){
+    function loadStats(mails) {
         setStats(mailService.getStats(mails))
 
     }
@@ -75,14 +75,20 @@ export function MailIndex() {
     if (!mails) return <div>Loading..</div>
 
 
-    return <div>
+    return (
         <div>
-            <Link to="/mail/compose" >New Mail</Link>
-            <MailFolderList onSetFilter={onSetFilter} stats={stats} />
-        </div>
-        <MailFilter onSetFilter={onSetFilter} filterBy={filterBy} />
-        <MailList mails={mails} onRemoveMail={onRemoveMail} onToggleRead={onToggleRead} />
-        <Outlet />
-    </div>
+            <div className="mail-main">
+                <div className="mail-folders">
+                    <Link to="/mail/compose">✎ Compose</Link>
+                    <MailFolderList onSetFilter={onSetFilter} stats={stats} />
+                </div>
+                <div className="mail-content">
+                <MailFilter onSetFilter={onSetFilter} filterBy={filterBy} />
+                <MailList mails={mails} onRemoveMail={onRemoveMail} onToggleRead={onToggleRead} />
+                </div>
+                <nav className="side-nav">x</nav>
+                <Outlet />
+            </div>
+        </div>)
 
 }
