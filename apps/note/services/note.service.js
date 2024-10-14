@@ -2,17 +2,25 @@ import { utilService } from '../../../services/util.service.js'
 import { storageService } from '../../../services/async-storage.service.js'
 
 const NOTE_KEY = 'noteDB'
+
 _createNotes()
+
 export const noteService = {
   query,
   get,
   save,
   remove,
   getEmptyNote,
+  getDefaultFilter,
 }
 
-function query() {
+function query(filterBy = {}) {
   return storageService.query(NOTE_KEY).then((notes) => {
+    if (filterBy.title) {
+      const regExp = new RegExp(filterBy.title, 'i')
+      notes = notes.filter((note) => regExp.test(note.info.title) || regExp.test(note.info.txt))
+    }
+
     return notes
   })
 }
@@ -32,8 +40,19 @@ function remove(noteId) {
   return storageService.remove(NOTE_KEY, noteId)
 }
 
+function getDefaultFilter() {
+  return { title: '' }
+}
+
 function getEmptyNote() {
-  return { title: '', content: '', type: 'NoteTxt', isPinned: false }
+  return {
+    id: '',
+    createdAt: '',
+    type: 'NoteTxt',
+    isPinned: '',
+    style: { backgroundColor: '#00d' },
+    info: { title: '', txt: '' },
+  }
 }
 
 function _createNotes() {
@@ -49,6 +68,7 @@ function _createNotes() {
           backgroundColor: '#00d',
         },
         info: {
+          title: '1',
           txt: 'Fullstack Me Baby!',
         },
       },
@@ -61,6 +81,7 @@ function _createNotes() {
           backgroundColor: '#00d',
         },
         info: {
+          title: '1',
           txt: 'Fullstack Me Baby!',
         },
       },
@@ -73,6 +94,7 @@ function _createNotes() {
           backgroundColor: '#00d',
         },
         info: {
+          title: '1',
           txt: 'Fullstack Me Baby!',
         },
       },
