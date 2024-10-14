@@ -32,6 +32,7 @@ export const mailService = {
     save,
     getEmptyMail,
     getDefaultFilter,
+    getStats,
 }
 
 function query(filterBy = {}) {
@@ -39,10 +40,22 @@ function query(filterBy = {}) {
         .then(mails => {
             if (filterBy.txt) {
                 const regExp = new RegExp(filterBy.txt, 'i')
-                mails = mails.filter(mail => regExp.test(mail.vendor))
+                mails = mails.filter(mail => regExp.test(mail.subject))
             }
-            if (filterBy.minSpeed) {
-                mails = mails.filter(mail => mail.speed >= filterBy.minSpeed)
+            if (filterBy.status) {
+                switch (filterBy.status) {
+                    case 'inbox': return mails
+                        break;
+                    case 'sent': mails = mails.filter(mail => mail.from === loggedInUser.email)
+                        break;
+                    case 'trash': return mails
+                        break;
+                    case 'draft': mails = mails.filter(mail => !mail.sentAt)
+                        break;
+                }
+            }
+            if (filterBy.starred) {
+                mails = mails.filter(mail => mail.isStarred === filterBy.starred)
             }
             return mails
         })
@@ -61,14 +74,14 @@ function save(mail) {
     if (mail.id) {
         return storageService.put(MAIL_KEY, mail)
     } else {
-        mail.createdAt= mail.sentAt = Date.now()
+        mail.createdAt = mail.sentAt = Date.now()
         mail.from = loggedInUser.email
         return storageService.post(MAIL_KEY, mail)
     }
 }
 
-function getEmptyMail(createdAt = '', subject = '', body = '', from = '', isRead = false, sentAt = '', removedAt = null, to = '') {
-    return { createdAt, subject, body, from ,isRead, sentAt, removedAt, to }
+function getEmptyMail(createdAt = '', subject = '', body = '', from = '', isRead = false, sentAt = '', removedAt = null, to = '', isStarred = false) {
+    return { createdAt, subject, body, from, isRead, sentAt, removedAt, to, isStarred }
 }
 
 
@@ -77,7 +90,7 @@ function getDefaultFilter() {
         status: '', // 'inbox/sent/trash/draft'
         txt: '', // no need to support complex text search
         isRead: '', // (optional property, if missing: show all)
-        isStared: '', // (optional property, if missing: show all)
+        isStarred: '', // (optional property, if missing: show all)
         labels: [] // has any of the labels }
     }
 }
@@ -88,11 +101,11 @@ function _createMails() {
     let mails = utilService.loadFromStorage(MAIL_KEY)
     if (!mails || !mails.length) {
         mails = [
-            _createMail('Miss you!', 'Would love to catch up sometimes', 'momo@momo.com',false, utilService.getRandomTimestamp(7)),
-            _createMail('Meeting Reminder', 'Just a reminder about our meeting tomorrow.', 'boss@company.com',false, utilService.getRandomTimestamp(6)),
+            _createMail('Miss you!', 'Would love to catch up sometimes', 'momo@momo.com', false, utilService.getRandomTimestamp(7)),
+            _createMail('Meeting Reminder', 'Just a reminder about our meeting tomorrow.', 'boss@company.com', false, utilService.getRandomTimestamp(6)),
             _createMail('Your Invoice', 'Please find your invoice attached.', 'billing@company.com', true, utilService.getRandomTimestamp(5)),
             _createMail('Newsletter Update', 'Check out our latest updates and offers!', 'newsletter@company.com', true, utilService.getRandomTimestamp(4)),
-            _createMail('Job Application', 'Thank you for your application. We will get back to you soon.', 'hr@company.com',false, utilService.getRandomTimestamp(3)),
+            _createMail('Job Application', 'Thank you for your application. We will get back to you soon.', 'hr@company.com', false, utilService.getRandomTimestamp(3)),
             _createMail('Happy Birthday!', 'Wishing you a fantastic birthday filled with joy!', 'friend@social.com', utilService.getRandomTimestamp(10)),
             _createMail('Project Update', 'The project is on track for the next milestone.', 'manager@company.com', false, utilService.getRandomTimestamp(9)),
             _createMail('Dinner Invitation', 'You are invited to dinner at my place this weekend!', 'inviter@social.com', false, utilService.getRandomTimestamp(8)),
@@ -104,7 +117,7 @@ function _createMails() {
 }
 
 function _createMail(subject, body, from, isRead = false, sentAt) {
-    const mail = getEmptyMail(Date.now(), subject, body, from, isRead, sentAt, null, )
+    const mail = getEmptyMail(Date.now(), subject, body, from, isRead, sentAt, null,)
     mail.id = utilService.makeId()
     return mail
 }
@@ -121,3 +134,16 @@ function _setNextPrevMailId(mail) {
     })
 }
 
+
+
+function getStats(mails) {
+    const stats = mails.reduce((acc, mail) => {
+        if (!mail.isRead) acc.isRead++
+        if (!mail.sentAt) acc.draft++
+        if (mail.isStarred) acc.starred++
+        if (mail.from === loggedInUser.email) acc.sent++
+        return acc
+    }, { isRead: 0, draft: 0, trash: 0, starred: 0, sent: 0 })
+    console.log(stats);
+    return stats; // Returning stats for potential further use
+}

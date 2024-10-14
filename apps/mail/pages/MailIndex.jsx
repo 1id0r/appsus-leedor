@@ -1,5 +1,5 @@
-const { Link, Outlet }= ReactRouterDOM
-const { useState, useEffect }= React
+const { Link, Outlet } = ReactRouterDOM
+const { useState, useEffect } = React
 
 
 import { MailFilter } from "../cmps/MailFilter.jsx"
@@ -11,48 +11,78 @@ import { mailService } from "../services/mail.service.js"
 
 export function MailIndex() {
 
-    const [mails, setMails]= useState(null)
-    const [filterBy, setFilterBy]= useState(null)
+    const [mails, setMails] = useState(null)
+    const [filterBy, setFilterBy] = useState(mailService.getDefaultFilter())
+    const [stats, setStats] = useState(null)
 
-    useEffect(()=>{
+    useEffect(() => {
         loadMails()
-    })
+    }, [filterBy])
 
-    function loadMails(){
-        mailService.query()
-        .then(setMails)
-        .catch(err=>{
-            console.log('err loading mails', err)
-        })
-    }
-
-    function onRemoveMail(mailId){
-        mailService.remove(mailId)
-        .then(()=>{
-            setMails(mails=>{
-                mails.filter(mail=> mail.id !== mailId)
+    function loadMails() {
+        mailService.query(filterBy)
+            .then(mails=>{
+                setMails(mails)
+                loadStats(mails)
             })
-        })
-        .catch(()=>{
-            console.log('err removing mail'+mailId, err)
-        })
+            .catch(err => {
+                console.log('err loading mails', err)
+            })
+
     }
 
-    function getUnread(){
-       return 4
+    function loadStats(mails){
+        setStats(mailService.getStats(mails))
+
     }
 
-    if(!mails) return <div>Loading..</div>
+    function onRemoveMail(mailId) {
+        mailService.remove(mailId)
+            .then(() => {
+                setMails(mails => {
+                    mails.filter(mail => mail.id !== mailId)
+                })
+            })
+            .catch(err => {
+                console.log('err removing mail' + mailId, err)
+            })
+    }
+
+    function onToggleRead(mail) {
+        console.log(mail)
+        mail.isRead = !mail.isRead
+        mailService.save(mail)
+            .then(updatedMail => {
+                const idx = mails.findIndex(prevMail => prevMail.id === mail.id)
+                setMails(prevMails => {
+                    const newMails = [...prevMails]
+                    newMails[idx] = updatedMail
+                    return newMails
+                })
+                loadStats(mails)
+            })
+            .catch(err => {
+                console.log('err editing mail' + mail.id, err)
+            })
+    }
+
+
+    function onSetFilter(filterByToEdit) {
+        if (!filterByToEdit) setFilterBy(mailService.getDefaultFilter())
+        setFilterBy(filterBy => ({ ...filterBy, ...filterByToEdit }))
+    }
+
+    if (!mails) return <div>Loading..</div>
 
 
     return <div>
         <div>
-        <Link to="/mail/compose" >New Mail</Link>
-        <MailFolderList unreadCount={getUnread()}/>
+            <Link to="/mail/compose" >New Mail</Link>
+            <MailFolderList onSetFilter={onSetFilter} stats={stats} />
         </div>
-        <MailFilter/>
-        <MailList mails={mails} onRemoveMail={onRemoveMail}/>
-        <Outlet/>
+        <MailFilter onSetFilter={onSetFilter} filterBy={filterBy} />
+        <MailList mails={mails} onRemoveMail={onRemoveMail} onToggleRead={onToggleRead} />
+        <Outlet />
     </div>
-  
+
 }
