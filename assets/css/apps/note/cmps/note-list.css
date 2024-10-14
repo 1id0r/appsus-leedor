@@ -1,4 +1,3 @@
- /* note list */
  .note-list {
      list-style: none;
      padding: 15px 0 0;
@@ -13,4 +12,99 @@
      justify-content: space-around;
      align-items: center;
      border: 1px solid black;
+
  }
+
+ .note-list-container {
+     max-width: 800px;
+     margin: 0 auto;
+     padding: 20px;
+ }
+
+ .note-list li {
+     border-radius: 8px;
+     overflow: hidden;
+     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+ }
+
+ h2 {
+     font-size: 24px;
+     margin-bottom: 15px;
+     color: #333;
+ }
+
+ /* General styles */
+ /* body {
+     font-family: Arial, sans-serif;
+     background-color: #f0f0f0;
+ }
+
+
+
+ .note-list {
+     display: flex;
+     flex-wrap: wrap;
+     gap: 20px;
+     list-style-type: none;
+     padding: 0;
+ }
+
+ 
+ 
+ .note-preview {
+     padding: 15px;
+     min-height: 100px;
+ }
+
+
+ h2 {
+     font-size: 24px;
+     margin-bottom: 15px;
+     color: #333;
+ }
+
+
+ .note-actions {
+     background-color: rgba(255, 255, 255, 0.8);
+     padding: 10px;
+     display: flex;
+     justify-content: space-between;
+ }
+
+ .note-actions button {
+     background-color: transparent;
+     border: none;
+     cursor: pointer;
+     font-size: 14px;
+     color: #555;
+ }
+
+
+ .pinned-notes,
+ .unpinned-notes {
+     margin-bottom: 30px;
+ }
+
+
+ img,
+ video {
+     max-width: 100%;
+     height: auto;
+     display: block;
+     margin-bottom: 10px;
+ }
+
+
+ @media (max-width: 768px) {
+     .note-list li {
+         width: calc(50% - 20px);
+     }
+ }
+
+ @media (max-width: 480px) {
+     .note-list li {
+         width: 100%;
+     }
+ }
+
+ /*  */

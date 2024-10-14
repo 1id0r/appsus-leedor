@@ -94,34 +94,42 @@ export function NoteAdd({ loadNotes }) {
         )
     }
   }
+  function togglePin() {
+    setNoteToAdd((prevNote) => ({ ...prevNote, isPinned: !prevNote.isPinned }))
+  }
 
   return (
     <section className='note-add'>
       <form onSubmit={onSaveNote}>
-        <input
-          type='text'
-          placeholder='Title'
-          name='title'
-          value={noteToAdd.info.title || ''}
-          onChange={handleChange}
-        />
-        {renderInputField()}
-        <div className='note-type-buttons'>
-          <button type='button' onClick={() => handleTypeChange('NoteTxt')}>
-            A
-          </button>
-          <button type='button' onClick={() => handleTypeChange('NoteImg')}>
-            🖼️
-          </button>
-          <button type='button' onClick={() => handleTypeChange('NoteVideo')}>
-            🎥
-          </button>
-          <button type='button' onClick={() => handleTypeChange('NoteAudio')}>
-            🔊
-          </button>
-
-          <button onClick={onSaveNote}>Save</button>
+        <div className='note-add-content'>
+          <input type='text' placeholder='Title' name='title' value={noteToAdd.info.title} onChange={handleChange} />
+          <input
+            type='text'
+            placeholder={noteToAdd.type === 'NoteImg' ? 'Enter img url...' : 'Take a note...'}
+            name={noteToAdd.type === 'NoteImg' ? 'url' : 'txt'}
+            value={noteToAdd.type === 'NoteImg' ? noteToAdd.info.url : noteToAdd.info.txt}
+            onChange={handleChange}
+          />
         </div>
+        <div className='note-add-actions'>
+          <div className='note-type-buttons'>
+            <button type='button' onClick={() => handleTypeChange('NoteTxt')}>
+              🅰️
+            </button>
+            <button type='button' onClick={() => handleTypeChange('NoteImg')}>
+              <img src='assets/img/image.svg' alt='' />
+            </button>
+            <button type='button' onClick={() => handleTypeChange('NoteVideo')}>
+              🎥
+            </button>
+          </div>
+          <button type='submit' className='save-button'>
+            Add
+          </button>
+        </div>
+        <button type='button' className={`pin-button ${noteToAdd.isPinned ? 'pinned' : ''}`} onClick={togglePin}>
+          {noteToAdd.isPinned ? '📌' : '🔽'}
+        </button>
       </form>
     </section>
   )
