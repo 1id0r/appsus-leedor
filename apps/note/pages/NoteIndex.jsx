@@ -1,9 +1,10 @@
 const { useState, useEffect } = React
 
+import { showErrorMsg, showSuccessMsg } from '../../../services/event-bus.service.js'
 import { NoteList } from '../cmps/NoteList.jsx'
 import { NoteFilter } from '../cmps/NoteFilter.jsx'
 import { noteService } from '../services/note.service.js'
-import { showErrorMsg, showSuccessMsg } from '../../../services/event-bus.service.js'
+import { NoteAdd } from '../cmps/NoteAdd.jsx'
 export function NoteIndex() {
   const [notes, setNotes] = useState()
   const [filterBy, setFilterBy] = useState(noteService.getDefaultFilter())
