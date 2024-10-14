@@ -54,5 +54,5 @@ export function MailIndex() {
         <MailList mails={mails} onRemoveMail={onRemoveMail}/>
         <Outlet/>
     </div>
+  )
 }
-

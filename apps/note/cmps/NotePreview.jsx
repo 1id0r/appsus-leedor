@@ -1,3 +1,8 @@
-export function NotePreview() {
-  return <h2>hello</h2>
+export function NotePreview({ note }) {
+  return (
+    <React.Fragment>
+      <h2>{note.info.title}</h2>
+      <h4>{note.info.txt}</h4>
+    </React.Fragment>
+  )
 }
