@@ -1,23 +1,4 @@
-li.mail{
-    display: flex;
-    justify-content: space-between;
 
-    height: 20px;
-
-    padding: 10px;
-    border: 1px solid gray 
-}
-
-li.mail.read{
-    background-color: rgba(0, 0, 0, 0.2);
-}
-li.mail.read .mail-preview h4{
-    font-weight: 200;
-}
-li.mail.unread{
-    background-color: rgba(0, 0, 0, 0);
-
-}
 
 .mail-preview p{
     margin: 0;

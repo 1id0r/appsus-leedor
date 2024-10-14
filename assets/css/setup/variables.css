@@ -1,3 +1,7 @@
 :root {
-    --main-bg-color: lightblue;
+    --main-mail-bg-color: #f6f8fc;
+    --mail-read-color: #f2f6fc;
+    --mail-unread-color: #ffffff;
+    --mail-compose-color: #c2e7ff;
+    ;
 }
