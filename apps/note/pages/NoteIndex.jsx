@@ -30,6 +30,13 @@ export function NoteIndex() {
         showErrorMsg(`Problems removing note (${noteId})`)
       })
   }
+  function onTogglePin(noteId) {
+    noteService.togglePin(noteId).then(() => {
+      setNotes((prevNotes) =>
+        prevNotes.map((note) => (note.id === noteId ? { ...note, isPinned: !note.isPinned } : note))
+      )
+    })
+  }
 
   function onSetFilter(filterByToEdit) {
     setFilterBy((filterBy) => ({ ...filterBy, ...filterByToEdit }))
@@ -40,7 +47,7 @@ export function NoteIndex() {
     <React.Fragment>
       <NoteFilter filterBy={filterBy} onSetFilter={onSetFilter} />
       <NoteAdd loadNotes={loadNotes} />
-      <NoteList onRemoveNote={onRemoveNote} notes={notes} />
+      <NoteList onTogglePin={onTogglePin} onRemoveNote={onRemoveNote} notes={notes} />
     </React.Fragment>
   )
 }

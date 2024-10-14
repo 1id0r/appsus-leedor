@@ -12,6 +12,7 @@ export const noteService = {
   remove,
   getEmptyNote,
   getDefaultFilter,
+  togglePin,
 }
 
 function query(filterBy = {}) {
@@ -47,12 +48,18 @@ function getDefaultFilter() {
 function getEmptyNote() {
   return {
     id: '',
-    createdAt: '',
+    createdAt: Date.now(),
     type: 'NoteTxt',
-    isPinned: '',
+    isPinned: false,
     style: { backgroundColor: 'grey' },
     info: { title: '', txt: '', url: '', todos: [] },
   }
+}
+function togglePin(noteId) {
+  return get(noteId).then((note) => {
+    note.isPinned = !note.isPinned
+    return save(note)
+  })
 }
 
 function _createNotes() {
@@ -61,7 +68,7 @@ function _createNotes() {
     const notes = [
       {
         id: 'n101',
-        createdAt: 1112222,
+        createdAt: Date.now(),
         type: 'NoteTxt',
         isPinned: true,
         style: {
@@ -99,7 +106,7 @@ function _createNotes() {
         },
       },
       {
-        id: 'n103',
+        id: 'n104',
         createdAt: 1112222,
         type: 'NoteVideo',
         isPinned: true,
@@ -112,7 +119,7 @@ function _createNotes() {
         },
       },
       {
-        id: 'n103',
+        id: 'n105',
         createdAt: 1112222,
         type: 'NoteImg',
         isPinned: true,
