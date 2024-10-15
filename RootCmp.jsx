@@ -1,5 +1,6 @@
 const { Route, Routes } = ReactRouterDOM
 const Router = ReactRouterDOM.HashRouter
+const { useState } = React
 
 import { AppHeader } from './cmps/AppHeader.jsx'
 import { About } from './pages/About.jsx'
@@ -11,6 +12,10 @@ import { NoteIndex } from './apps/note/pages/NoteIndex.jsx'
 import { NoteEdit } from './apps/note/pages/NoteEdit.jsx'
 
 export function App() {
+
+  const [page, setPage] = useState('home')
+  console.log(page)
+
   return (
     <Router>
       <section className='app'>

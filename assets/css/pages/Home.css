@@ -1,1 +1,39 @@
- /* home */
+.home {
+    height: 100vh;
+    overflow: hidden;
+    color: white;
+}
+
+.home h1 {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    translate: -50% -50%;
+    font-size: 200px;
+    transition: translate .8s;
+}
+
+
+.home nav {
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    translate: -50% -50%;
+
+    display: flex;
+    justify-content: center;
+    gap: 2em;
+}
+
+.home nav a img {
+    width: 25px;
+    height: 20px;
+}
+
+.home nav a:last-child img {
+    width: 18px;
+}
+
+.home img {
+    width: 100vw;
+}
