@@ -3,14 +3,14 @@ const { Link } = ReactRouterDOM
 import { NotePreview } from './NotePreview.jsx'
 
 // return <NotePreview />
-export function NoteList({ notes, onRemoveNote, onTogglePin, onDuplicateNote }) {
+export function NoteList({ notes, onRemoveNote, onTogglePin, onDuplicateNote, onToggleTodo }) {
   //   console.log(notes)
   const pinnedNotes = notes.filter((note) => note.isPinned)
   const unpinnedNotes = notes.filter((note) => !note.isPinned)
 
   const renderNoteItem = (note) => (
     <li key={note.id} style={{ backgroundColor: note.style.backgroundColor }}>
-      <NotePreview note={note} />
+      <NotePreview onToggleTodo={onToggleTodo} note={note} />
       <section className='note-actions'>
         <button onClick={() => onRemoveNote(note.id)}>
           {' '}

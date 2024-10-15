@@ -1,4 +1,4 @@
-const { useNavigate, useParams } = ReactRouterDOM
+const { useNavigate, useParams, useLocation } = ReactRouterDOM
 const { useState, useEffect } = React
 
 import { noteService } from '../services/note.service.js'
@@ -6,11 +6,26 @@ import { showErrorMsg, showSuccessMsg } from '../../../services/event-bus.servic
 
 export function NoteAdd({ loadNotes }) {
   const [noteToAdd, setNoteToAdd] = useState(noteService.getEmptyNote())
-  // const navigate = useNavigate()
+  const location = useLocation()
 
   useEffect(() => {
-    loadNotes()
-  }, [noteToAdd])
+    // Parse URL parameters
+    const searchParams = new URLSearchParams(location.search)
+    const title = searchParams.get('title')
+    const text = searchParams.get('text')
+
+    // Update noteToAdd if URL parameters are present
+    if (title || text) {
+      setNoteToAdd((prevNote) => ({
+        ...prevNote,
+        info: {
+          ...prevNote.info,
+          title: title || prevNote.info.title,
+          txt: text || prevNote.info.txt,
+        },
+      }))
+    }
+  }, [location])
 
   function handleChange({ target }) {
     const field = target.name
@@ -35,9 +50,10 @@ export function NoteAdd({ loadNotes }) {
   }
   function onSaveNote(ev) {
     console.log(noteToAdd)
+    let noteToSave = { ...noteToAdd }
     ev.preventDefault()
-    if (noteToAdd.type === 'NoteTodos') {
-      const todos = noteToAdd.info.todos.split(',').map((todo) => ({
+    if (noteToSave.type === 'NoteTodos') {
+      const todos = noteToSave.info.todos.split(',').map((todo) => ({
         txt: todo.trim(),
         isDone: false,
       }))
