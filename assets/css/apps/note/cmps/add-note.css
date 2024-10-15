@@ -1,5 +1,6 @@
 .note-add {
-    width: 600px;
+    width: 90%;
+    max-width: 600px;
     margin: 20px auto;
     padding: 15px;
     border-radius: 8px;
@@ -43,7 +44,6 @@
 .note-type-buttons button {
     background: none;
     border: none;
-    font-size: 20px;
     cursor: pointer;
     padding: 5px;
 }

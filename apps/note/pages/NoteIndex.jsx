@@ -9,6 +9,7 @@ import { NoteAdd } from '../cmps/NoteAdd.jsx'
 export function NoteIndex() {
   const [notes, setNotes] = useState()
   const [filterBy, setFilterBy] = useState(noteService.getDefaultFilter())
+  const [showPalette, setShowPalette] = useState(null)
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -62,6 +63,16 @@ export function NoteIndex() {
         showErrorMsg(`Problems toggling todo`)
       })
   }
+  function handleColorChange(noteId, color) {
+    noteService.get(noteId).then((note) => {
+      note.style.backgroundColor = color
+      noteService.save(note).then((updatedNote) => {
+        // Update your state here to re-render the notes with the new color
+        setNotes((prevNotes) => prevNotes.map((n) => (n.id === noteId ? updatedNote : n)))
+      })
+    })
+    setShowPalette(null) // Close the palette after selection
+  }
   function onSendAsMail(noteId) {
     console.log(noteId)
     noteService
@@ -98,6 +109,7 @@ export function NoteIndex() {
       <Outlet context={{ onUpdateNote }} />
       <NoteAdd loadNotes={loadNotes} />
       <NoteList
+        setShowPalette={setShowPalette}
         onSendAsMail={onSendAsMail}
         onDuplicateNote={onDuplicateNote}
         onTogglePin={onTogglePin}

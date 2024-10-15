@@ -3,7 +3,15 @@ const { Link } = ReactRouterDOM
 import { NotePreview } from './NotePreview.jsx'
 
 // return <NotePreview />
-export function NoteList({ notes, onRemoveNote, onTogglePin, onDuplicateNote, onToggleTodo, onSendAsMail }) {
+export function NoteList({
+  notes,
+  onRemoveNote,
+  onTogglePin,
+  onDuplicateNote,
+  onToggleTodo,
+  onSendAsMail,
+  setShowPalette,
+}) {
   //   console.log(notes)
   const pinnedNotes = notes.filter((note) => note.isPinned)
   const unpinnedNotes = notes.filter((note) => !note.isPinned)
@@ -14,26 +22,26 @@ export function NoteList({ notes, onRemoveNote, onTogglePin, onDuplicateNote, on
       <section className='note-actions'>
         <button onClick={() => onRemoveNote(note.id)}>
           {' '}
-          <img src='assets/img/delete.svg' alt='edit' />
+          <span class='material-symbols-outlined'>delete</span>
         </button>
         <Link to={`/note/edit/${note.id}`}>
           <button>
-            <img src='assets/img/edit.svg' alt='edit' />
+            <span class='material-symbols-outlined'>edit</span>
           </button>
         </Link>
         <button onClick={() => onDuplicateNote(note.id)}>
           {' '}
-          <img src='assets/img/duplicate.svg' alt='duplicate' />
+          <span class='material-symbols-outlined'>content_copy</span>
         </button>
         <button onClick={() => onSendAsMail(note.id)}>
-          <img src='assets/img/share.svg' alt='duplicate' />
+          <span class='material-symbols-outlined'>ios_share</span>
         </button>
       </section>
       <button className='pin-btn' onClick={() => onTogglePin(note.id)}>
         {note.isPinned ? (
-          <img src='assets/img/pinned.svg' alt='not pinned' />
+          <span class='material-symbols-outlined'>keep</span>
         ) : (
-          <img src='assets/img/notpinned.svg' alt='pinned' />
+          <span class='material-symbols-outlined'>keep_off</span>
         )}
       </button>
     </li>
