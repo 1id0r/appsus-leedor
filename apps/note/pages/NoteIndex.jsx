@@ -1,5 +1,5 @@
 const { useState, useEffect } = React
-const { Outlet } = ReactRouterDOM
+const { Outlet, useNavigate } = ReactRouterDOM
 
 import { showErrorMsg, showSuccessMsg } from '../../../services/event-bus.service.js'
 import { NoteList } from '../cmps/NoteList.jsx'
@@ -9,6 +9,7 @@ import { NoteAdd } from '../cmps/NoteAdd.jsx'
 export function NoteIndex() {
   const [notes, setNotes] = useState()
   const [filterBy, setFilterBy] = useState(noteService.getDefaultFilter())
+  const navigate = useNavigate()
 
   useEffect(() => {
     loadNotes()
@@ -61,6 +62,25 @@ export function NoteIndex() {
         showErrorMsg(`Problems toggling todo`)
       })
   }
+  function onSendAsMail(noteId) {
+    console.log(noteId)
+    noteService
+      .get(noteId)
+      .then((note) => {
+        if (note) {
+          const subject = encodeURIComponent(note.info.title)
+          console.log(subject)
+          const body = encodeURIComponent(note.info.txt)
+          console.log(body)
+          navigate(`/mail/compose?subject=${subject}&body=${body}`)
+        } else {
+          console.error('Note not found')
+        }
+      })
+      .catch((err) => {
+        console.error('Error fetching note:', err)
+      })
+  }
 
   function onSetFilter(filterByToEdit) {
     setFilterBy((filterBy) => ({ ...filterBy, ...filterByToEdit }))
@@ -78,6 +98,7 @@ export function NoteIndex() {
       <Outlet context={{ onUpdateNote }} />
       <NoteAdd loadNotes={loadNotes} />
       <NoteList
+        onSendAsMail={onSendAsMail}
         onDuplicateNote={onDuplicateNote}
         onTogglePin={onTogglePin}
         onToggleTodo={onToggleTodo}
