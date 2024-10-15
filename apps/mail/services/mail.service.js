@@ -32,10 +32,11 @@ export const mailService = {
     save,
     getEmptyMail,
     getDefaultFilter,
+    getDefaultSort,
     getStats,
 }
 
-function query(filterBy = {}) {
+function query(filterBy = {}, sortBy={}) {
     return storageService.query(MAIL_KEY)
         .then(mails => {
             if (filterBy.txt) {
@@ -95,22 +96,29 @@ function getDefaultFilter() {
     }
 }
 
+function getDefaultSort() {
+    return {
+        date: 1, 
+        title: '',
+    }
+}
+
 
 
 function _createMails() {
     let mails = utilService.loadFromStorage(MAIL_KEY)
     if (!mails || !mails.length) {
         mails = [
-            _createMail('Miss you!', 'Would love to catch up sometimes', 'momo@momo.com', false, utilService.getRandomTimestamp(7)),
-            _createMail('Meeting Reminder', 'Just a reminder about our meeting tomorrow.', 'boss@company.com', false, utilService.getRandomTimestamp(6)),
-            _createMail('Your Invoice', 'Please find your invoice attached.', 'billing@company.com', true, utilService.getRandomTimestamp(5)),
-            _createMail('Newsletter Update', 'Check out our latest updates and offers!', 'newsletter@company.com', true, utilService.getRandomTimestamp(4)),
-            _createMail('Job Application', 'Thank you for your application. We will get back to you soon.', 'hr@company.com', false, utilService.getRandomTimestamp(3)),
-            _createMail('Happy Birthday!', 'Wishing you a fantastic birthday filled with joy!', 'friend@social.com', utilService.getRandomTimestamp(10)),
-            _createMail('Project Update', 'The project is on track for the next milestone.', 'manager@company.com', false, utilService.getRandomTimestamp(9)),
-            _createMail('Dinner Invitation', 'You are invited to dinner at my place this weekend!', 'inviter@social.com', false, utilService.getRandomTimestamp(8)),
-            _createMail('Weekly Summary', 'Here is your weekly summary of activities.', 'newsletter@company.com', true, utilService.getRandomTimestamp(7)),
-            _createMail('Feedback Request', 'We value your feedback. Please share your thoughts!', 'support@company.com', false, utilService.getRandomTimestamp(6))
+            _createMail('Miss you!', 'Would love to catch up sometimes', 'momo@momo.com', false, utilService.getRandomTimestamp()),
+            _createMail('Meeting Reminder', 'Just a reminder about our meeting tomorrow.', 'boss@company.com', false, utilService.getRandomTimestamp()),
+            _createMail('Your Invoice', 'Please find your invoice attached.', 'billing@company.com', true, utilService.getRandomTimestamp()),
+            _createMail('Newsletter Update', 'Check out our latest updates and offers!', 'newsletter@company.com', true, utilService.getRandomTimestamp()),
+            _createMail('Job Application', 'Thank you for your application. We will get back to you soon.', 'hr@company.com', false, utilService.getRandomTimestamp()),
+            _createMail('Happy Birthday!', 'Wishing you a fantastic birthday filled with joy!', 'friend@social.com', utilService.getRandomTimestamp()),
+            _createMail('Project Update', 'The project is on track for the next milestone.', 'manager@company.com', false, utilService.getRandomTimestamp()),
+            _createMail('Dinner Invitation', 'You are invited to dinner at my place this weekend!', 'inviter@social.com', false, utilService.getRandomTimestamp()),
+            _createMail('Weekly Summary', 'Here is your weekly summary of activities.', 'newsletter@company.com', true, utilService.getRandomTimestamp()),
+            _createMail('Feedback Request', 'We value your feedback. Please share your thoughts!', 'support@company.com', false, utilService.getRandomTimestamp())
         ]
         utilService.saveToStorage(MAIL_KEY, mails)
     }
@@ -144,6 +152,5 @@ function getStats(mails) {
         if (mail.from === loggedInUser.email) acc.sent++
         return acc
     }, { isRead: 0, draft: 0, trash: 0, starred: 0, sent: 0 })
-    console.log(stats);
     return stats; // Returning stats for potential further use
 }

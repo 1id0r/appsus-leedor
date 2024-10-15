@@ -1,16 +1,37 @@
-
-
 .mail-preview p{
     margin: 0;
 }
 
 .mail-preview{
     display: flex;
-    justify-content: space-between;
 
-    gap: 1em;
+    width: calc(100% - 60px);
+    font-weight: 100;
+    margin-inline-start: .5em;
+}
+.mail-list li:hover .mail-preview{
+    width: calc(100% - 144px)
+}
 
-    width: 60%;
+.mail-preview h4{
     font-weight: 200;
+}
+
+.mail-preview h4:first-child{
+    width: 140px;
+}
+
+.mail-preview h4:nth-child(2){
+    overflow: hidden;
+    width: 100%;
+    
+}
+
+.mail-preview h4:nth-child(2) span{
+    font-weight: 100;
+}
+
+.mail-list li:hover .mail-preview h4:last-child{
+    display: none;
 }
 
