@@ -21,13 +21,12 @@ export function NoteList({ notes, onRemoveNote, onTogglePin }) {
             <img src='assets/img/edit.svg' alt='edit' />
           </button>
         </Link>
-        <section></section>
       </section>
       <button className='pin-btn' onClick={() => onTogglePin(note.id)}>
         {note.isPinned ? (
-          <img src='assets/img/notpinned.svg' alt='not pinned' />
+          <img src='assets/img/pinned.svg' alt='not pinned' />
         ) : (
-          <img src='assets/img/pinned.svg' alt='pinned' />
+          <img src='assets/img/notpinned.svg' alt='pinned' />
         )}
       </button>
     </li>

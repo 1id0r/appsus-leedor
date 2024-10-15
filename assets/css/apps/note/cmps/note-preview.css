@@ -1,18 +1,10 @@
-video {
-    background-color: grey;
-    /* display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center; */
-}
-
 .note-preview {
     position: relative;
     padding: 16px;
     border-radius: 8px;
-    width: 200px;
-    height: 200px;
-    display: flex;
+    max-width: 200px;
+    height: 100px;
+    */ display: flex;
     flex-direction: column;
     justify-content: top;
     align-items: left;
