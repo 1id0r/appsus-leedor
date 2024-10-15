@@ -26,6 +26,11 @@ export function MailDetails() {
             })
     }
 
+    if (!mail) return <div>Loading..</div>
+
+    const { from, to, subject, body, sentAt } = mail
+    const date = new Date(sentAt)
+
     function onRemoveMail(mailId) {
         mailService.remove(mailId)
             .then(() => navigate('/mail'))
@@ -34,10 +39,11 @@ export function MailDetails() {
             })
     }
 
-    if (!mail) return <div>Loading..</div>
+    function onSaveAsNote(){
+        navigate(`/notes/add?title=${encodeURIComponent(someTitle)}&text=${encodeURIComponent(someText)}`)
+    }
 
-    const { from, to, subject, body, sentAt } = mail
-    const date = new Date(sentAt)
+ 
     
     return (
         <section className="mail-details">
@@ -48,7 +54,7 @@ export function MailDetails() {
                 |
                 <button><span class="material-symbols-outlined">mark_email_unread</span></button>
                 <button><span class="material-symbols-outlined">schedule</span></button>
-                <button><img src='assets/img/keep.svg' alt='keep' /></button>
+                <button onClick={()=>onSaveAsNote()}><img src='assets/img/keep.svg' alt='keep' /></button>
                 |
                 <button><span class="material-symbols-outlined">drive_file_move</span></button>
                 <button><span class="material-symbols-outlined">label</span></button>

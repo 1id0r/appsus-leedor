@@ -139,7 +139,6 @@ export function MailIndex() {
             sortBy={sortBy}
             onSetSort={onSetSort}
           />
-          />
         </div>
         <nav className='side-nav'></nav>
         <Outlet />

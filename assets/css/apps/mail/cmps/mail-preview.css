@@ -31,6 +31,10 @@
     font-weight: 100;
 }
 
+.mail-list .mail-preview h4:last-child{
+    display: none;
+}
+
 .mail-list li:hover .mail-preview h4:last-child{
     display: none;
 }

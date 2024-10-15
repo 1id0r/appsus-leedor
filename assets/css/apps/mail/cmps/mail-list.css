@@ -19,7 +19,7 @@
 
  }
 
- li:first-child {
+ .mail-list li:first-child {
    height: 48px;
    background-color: var(--mail-unread-color);
    border-radius: 1em 1em 0 0;

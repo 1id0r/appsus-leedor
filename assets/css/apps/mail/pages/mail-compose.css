@@ -10,6 +10,7 @@
     background-color: white;
 
     font-size: 14px;
+    border-radius: 1em;
 }
 
 .mail-compose header {
@@ -20,6 +21,8 @@
     font-size: 14px;
     height: 40px;
     padding: 10px 1em;
+    border-radius: 1em 1em 0 0;
+
 }
 .mail-compose header button {
     background: none;
@@ -50,7 +53,7 @@
     padding: 1em;
     font-size: 1em;
 
-
+    border-radius: 0 0 1em 1em;
 }
 
 .mail-compose form button{

@@ -34,6 +34,7 @@ export const mailService = {
     getDefaultFilter,
     getDefaultSort,
     getStats,
+    getNewMailFromSearchParams,
 }
 
 function query(filterBy = {}, sortBy={}) {
@@ -155,4 +156,14 @@ function getStats(mails) {
         return acc
     }, { isRead: 0, draft: 0, trash: 0, starred: 0, sent: 0 })
     return stats; // Returning stats for potential further use
+}
+
+function getNewMailFromSearchParams(searchParams) {
+    const subject = searchParams.get('subject') || ''
+    const body = searchParams.get('body') || ''
+    const mail=  getEmptyMail()
+    mail.subject= subject
+    mail.body= body
+
+    return mail
 }
