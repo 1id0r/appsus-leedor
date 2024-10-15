@@ -1,23 +1,46 @@
 header {
-    background: lightcyan;
+    background: #a9d6e5;
     border-bottom: 2px solid white;
+    color: white;
 }
 
 .app-header {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 20px 0;
 }
 
-nav a {
+.app-header .logo {
+    width: 100px;
+    height: 20px;
+}
+
+.app-header nav {
+    display: flex;
+    align-items: center;
+}
+
+.app-header nav a {
     margin: .5em;
+    height: 20px;
 }
 
-nav a:active {
-    color: purple;
+.app-header nav a img {
+    width: 25px;
+    height: 20px;
 }
 
-nav a.active {
+.app-header nav a:last-child img {
+    width: 18px;
+}
+
+
+.app-header nav a:active {
+    color: #800080;
+}
+
+.app-header nav a.active {
     color: darkblue;
     font-weight: bold;
     text-decoration: overline;
