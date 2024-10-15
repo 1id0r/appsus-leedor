@@ -12,7 +12,7 @@ export function MailPreview({ mail}) {
             <Link to={`/mail/${id}`} className="mail-preview">
                 <h4>{sender}</h4>
                 <h4>{subject} <span>{body}</span></h4>
-                <h4>{date.getDate()}.{date.getMonth()}</h4>
+                <h4>{date.toLocaleString('default', { month: 'long' })} {date.getDate()}</h4>
             </Link>
     )
 }

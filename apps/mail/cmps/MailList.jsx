@@ -1,4 +1,3 @@
-const { Link, Outlet } = ReactRouterDOM
 
 import { MailPreview } from "./MailPreview.jsx";
 import { MailSort } from "../cmps/MailSort.jsx"

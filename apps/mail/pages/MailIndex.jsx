@@ -16,6 +16,10 @@ export function MailIndex() {
   useEffect(() => {
     loadMails()
   }, [filterBy, sortBy])
+  useEffect(() => {
+    loadMails()
+    loadStats(mails)
+  }, [filterBy, sortBy])
 
   function loadMails() {
     mailService
@@ -28,8 +32,23 @@ export function MailIndex() {
         console.log('err loading mails', err)
       })
   }
+  function loadMails() {
+    mailService
+      .query(filterBy, sortBy)
+      .then((mails) => {
+        setMails(mails)
+        loadStats(mails)
+      })
+      .catch((err) => {
+        console.log('err loading mails', err)
+      })
+  }
 
   function loadStats(mails) {
+    setStats(mailService.getStats(mails))
+  }
+  function loadStats(mails) {
+    if (!mails) return
     setStats(mailService.getStats(mails))
   }
 
@@ -40,6 +59,16 @@ export function MailIndex() {
         setMails((mails) => {
           mails.filter((mail) => mail.id !== mailId)
         })
+      })
+      .catch((err) => {
+        console.log('err removing mail' + mailId, err)
+      })
+  }
+  function onRemoveMail(mailId) {
+    mailService
+      .remove(mailId)
+      .then(() => {
+        setMails((mails) => mails.filter((mail) => mail.id !== mailId))
       })
       .catch((err) => {
         console.log('err removing mail' + mailId, err)
@@ -79,6 +108,15 @@ export function MailIndex() {
       return newSort
     })
   }
+  function onSetSort(sort) {
+    const clearSort = mailService.getDefaultSort()
+    setSortBy((sortBy) => ({ ...clearSort, [sort]: !sortBy[sort] ? 1 : -sortBy[sort] }))
+  }
+
+  function onUpdateMail(savedMail) {
+    setMails((prevMails) => [...prevMails, savedMail])
+    loadStats(mails)
+  }
 
   if (!mails) return <div>Loading..</div>
 
@@ -100,6 +138,7 @@ export function MailIndex() {
             onToggleRead={onToggleRead}
             sortBy={sortBy}
             onSetSort={onSetSort}
+          />
           />
         </div>
         <nav className='side-nav'></nav>

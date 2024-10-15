@@ -6,4 +6,15 @@
 .mail-sort p{
     display: flex;
     font-size: 1em;
+    margin-block-start: .4em;
+    text-align: center;
+    padding: .4em .8em;
+    border-radius: 1.5em;
+}
+.mail-sort p.sort-by span.material-symbols-outlined{
+    width: 20px;
+}
+
+.mail-sort p.on{
+    background-color: var(--mail-hovered);
 }
