@@ -61,6 +61,11 @@ function togglePin(noteId) {
     return save(note)
   })
 }
+function getRandomColor() {
+  const colors = ['#FF99C8', '#FCF6BD', '#D0F4DE', '#A9DEF9', '#E4C1F9']
+  const randomIndex = Math.floor(Math.random() * colors.length)
+  return colors[randomIndex]
+}
 
 function _createNotes() {
   let notes = utilService.loadFromStorage(NOTE_KEY)
@@ -72,7 +77,7 @@ function _createNotes() {
         type: 'NoteTxt',
         isPinned: true,
         style: {
-          backgroundColor: 'grey',
+          backgroundColor: getRandomColor(),
         },
         info: {
           title: '1',
@@ -85,7 +90,7 @@ function _createNotes() {
         type: 'NoteTxt',
         isPinned: true,
         style: {
-          backgroundColor: 'grey',
+          backgroundColor: getRandomColor(),
         },
         info: {
           title: '1',
@@ -98,7 +103,7 @@ function _createNotes() {
         type: 'NoteTxt',
         isPinned: true,
         style: {
-          backgroundColor: 'grey',
+          backgroundColor: getRandomColor(),
         },
         info: {
           title: '1',
@@ -111,7 +116,7 @@ function _createNotes() {
         type: 'NoteVideo',
         isPinned: true,
         style: {
-          backgroundColor: 'grey',
+          backgroundColor: getRandomColor(),
         },
         info: {
           title: '1',
@@ -124,7 +129,7 @@ function _createNotes() {
         type: 'NoteImg',
         isPinned: true,
         style: {
-          backgroundColor: 'grey',
+          backgroundColor: getRandomColor(),
         },
         info: {
           title: '1',

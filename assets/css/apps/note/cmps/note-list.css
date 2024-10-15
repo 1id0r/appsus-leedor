@@ -13,7 +13,6 @@
  .note-list li {
      min-width: 240px;
      min-height: 120px;
-     background-color: #202124;
      border-radius: 8px;
      overflow: hidden;
      position: relative;
