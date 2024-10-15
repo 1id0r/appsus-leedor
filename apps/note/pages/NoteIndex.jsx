@@ -73,14 +73,14 @@ export function NoteIndex() {
   return (
     <React.Fragment>
       <div className='filter-container'>
-        <NoteFilter filterBy={filterBy} onSetFilter={onSetFilter} />
+        <NoteFilter onToggleTodo={onToggleTodo} filterBy={filterBy} onSetFilter={onSetFilter} />
       </div>
       <Outlet context={{ onUpdateNote }} />
       <NoteAdd loadNotes={loadNotes} />
       <NoteList
         onDuplicateNote={onDuplicateNote}
-        onToggleTodo={onToggleTodo}
         onTogglePin={onTogglePin}
+        onToggleTodo={onToggleTodo}
         onRemoveNote={onRemoveNote}
         notes={notes}
       />

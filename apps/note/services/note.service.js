@@ -14,6 +14,7 @@ export const noteService = {
   getDefaultFilter,
   togglePin,
   duplicate,
+  toggleTodo,
 }
 
 function query(filterBy = {}) {
@@ -53,7 +54,7 @@ function getEmptyNote() {
     type: 'NoteTxt',
     isPinned: false,
     style: { backgroundColor: 'grey' },
-    info: { title: '', txt: '', url: '', todos: [] },
+    info: { title: '', txt: '', url: '', todos: '' },
   }
 }
 
@@ -72,6 +73,15 @@ function duplicate(noteId) {
   return get(noteId).then((note) => {
     const duplicatedNote = { ...note, id: '', createdAt: Date.now() }
     return save(duplicatedNote)
+  })
+}
+function toggleTodo(noteId, todoIndex) {
+  return get(noteId).then((note) => {
+    if (note.type === 'NoteTodos') {
+      note.info.todos[todoIndex].isDone = !note.info.todos[todoIndex].isDone
+      return save(note)
+    }
+    return note
   })
 }
 

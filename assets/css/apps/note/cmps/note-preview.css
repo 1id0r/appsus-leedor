@@ -34,3 +34,23 @@
     border-radius: 8px;
 
 }
+
+.todo-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.todo-list li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.todo-list li.done span {
+    text-decoration: line-through;
+    color: #888;
+}
+
+.todo-list input[type="checkbox"] {
+    margin-right: 10px;
+}
