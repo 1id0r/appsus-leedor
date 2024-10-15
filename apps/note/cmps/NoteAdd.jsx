@@ -107,16 +107,16 @@ export function NoteAdd({ loadNotes }) {
         <div className='note-add-actions'>
           <div className='note-type-buttons'>
             <button type='button' onClick={() => handleTypeChange('NoteTxt')}>
-              <img src='assets/img/text.svg' alt='text' />
+              <span class='material-symbols-outlined'>title</span>
             </button>
             <button type='button' onClick={() => handleTypeChange('NoteImg')}>
-              <img src='assets/img/image.svg' alt='video' />
+              <span class='material-symbols-outlined'>image</span>
             </button>
             <button type='button' onClick={() => handleTypeChange('NoteVideo')}>
-              <img src='assets/img/movie.svg' alt='video' />
+              <span class='material-symbols-outlined'>movie</span>
             </button>
             <button type='button' onClick={() => handleTypeChange('NoteTodos')}>
-              todo
+              <span class='material-symbols-outlined'>list</span>
             </button>
           </div>
           <button type='submit' className='save-button'>
@@ -125,9 +125,9 @@ export function NoteAdd({ loadNotes }) {
         </div>
         <button type='button' className={`pin-button ${noteToAdd.isPinned ? 'pinned' : ''}`} onClick={togglePin}>
           {noteToAdd.isPinned ? (
-            <img src='assets/img/pinned.svg' alt='pinned' />
+            <span class='material-symbols-outlined'>keep</span>
           ) : (
-            <img src='assets/img/notpinned.svg' alt='not pinned' />
+            <span class='material-symbols-outlined'>keep_off</span>
           )}
         </button>
       </form>
