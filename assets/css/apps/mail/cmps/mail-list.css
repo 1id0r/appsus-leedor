@@ -4,35 +4,49 @@
     list-style: none;
     padding: 0;
     width: 100%;
+    border-radius: 1em;
  }
 
- li.mail{
-   display: flex;
-   justify-content: space-between;
+ li.mail {
+    display: flex;
+    justify-content: space-between;
 
-   height: 20px;
+    height: 20px;
 
-   padding: 10px;
-   border: 1px solid rgba(128, 128, 128, 0.357);
-   border-block-end: 0;
-}
+    padding: 10px;
+    border: 1px solid rgba(128, 128, 128, 0.105);
+    border-block-end: 0;
+ }
 
-li.mail.read{
-   background-color:var(--mail-read-color);
-}
-li.mail.read .mail-preview h4{
-   font-weight: 200;
-}
-li.mail.unread{
-   background-color:var(--mail-unread-color);
-}
+ li.mail:first-child {
+    border-radius: 1em 1em 0 0;
+ }
+
+ li.mail:last-child {
+   border-radius: 0 0 1em 1em;
+    border-block-end: 1px solid rgba(128, 128, 128, 0.105);
+ }
+
+
+ li.mail.read {
+    background-color: var(--mail-read-color);
+ }
+
+ li.mail.read .mail-preview h4 {
+    font-weight: 200;
+ }
+
+ li.mail.unread {
+    background-color: var(--mail-unread-color);
+ }
 
  .mail-list li button {
-   display: none;
-   background: none;
-   border: none;
+    display: none;
+    background: none;
+    border: none;
  }
 
  .mail-list li:hover button {
-   display: inline;
+    display: inline;
+    cursor: pointer;
  }
