@@ -1,0 +1,56 @@
+.mail-filter{
+    position: absolute;
+    background-color: var(--mail-search);
+    width: calc(100vw - 460px) ;
+    height: 48px;
+    line-height: 60px;
+    border-radius: 24px;
+    top: 8px;
+}
+
+.mail-filter:has(input:focus){
+    background-color: var(--mail-unread-color);
+
+}
+
+.mail-filter button{
+    width: 36px;
+    height: 36px;
+    line-height: 0;
+    cursor: pointer;
+
+    padding: 6px;
+    background: none;
+    border: none;
+    border-radius: 50%;
+    outline: none;
+    margin: 6px;
+}
+
+.mail-filter button:first-child{
+    background-color: #00000010;
+}
+
+.mail-filter button:hover{
+    background-color: #00000010;
+
+}
+
+.mail-filter input{
+    width: calc(100% - 100px);
+    height: 20px;
+    font-size: 1em;
+
+    background: none;
+    border: none;
+    transform: translateY(-6px);
+}
+
+.mail-filter input:focus{
+    outline: none;
+}
+
+.mail-filter button.filter-clear{
+    position: absolute;
+    right: 48px;
+}

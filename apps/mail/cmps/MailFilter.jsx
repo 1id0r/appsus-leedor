@@ -2,7 +2,7 @@ const { useState, useEffect } = React
 
 import { mailService } from "../services/mail.service.js"
 
-export function MailFilter({filterBy, onSetFilter}) {
+export function MailFilter({ filterBy, onSetFilter }) {
 
     const [filterByToEdit, setFilterByToEdit] = useState({ ...filterBy })
 
@@ -22,11 +22,11 @@ export function MailFilter({filterBy, onSetFilter}) {
         setFilterByToEdit(prevFilter => ({ ...prevFilter, [field]: value }))
     }
 
-    function onSearch(){
+    function onSearch() {
         onSetFilter(filterByToEdit)
     }
 
-    function onClearSearch(){
+    function onClearSearch() {
         onSetFilter()
         setFilterByToEdit(mailService.getDefaultFilter())
     }
@@ -37,17 +37,23 @@ export function MailFilter({filterBy, onSetFilter}) {
 
     return (
         <section className="mail-filter">
-            <div>
-                <button onClick={onSearch}>🔍</button>
-                <input 
-                onChange={handleChange} 
-                value={txt} 
-                type="text" 
-                name="txt" 
-                placeholder="Search mail"/>
-                <button onClick={onClearSearch}>x</button>
-                <button>⥹</button>
-            </div>
+                <button onClick={onSearch}>
+                    <span class="material-symbols-outlined">search</span>
+                </button>
+                <input
+                    onChange={handleChange}
+                    value={txt}
+                    type="text"
+                    name="txt"
+                    placeholder="Search mail" />
+                {txt ?
+                    <button onClick={onClearSearch} className="filter-clear">
+                        <span class="material-symbols-outlined">close</span>
+                    </button>
+                    : ''}
+                <button>
+                    <span class="material-symbols-outlined">tune</span>
+                </button>
         </section>
     )
 }

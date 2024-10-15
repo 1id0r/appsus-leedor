@@ -9,12 +9,18 @@ export function MailList({ mails, onRemoveMail, onToggleRead }) {
                 <li key={mail.id} className={`mail ${mail.isRead ? 'read' : 'unread'}`}>
                     <div>
                         <input type="checkbox"></input>
-                        <button>☆</button>
+                        <button><span class="material-symbols-outlined">star</span></button>
                     </div>
-                    <MailPreview mail={mail}/>
+                    <MailPreview mail={mail} />
                     <div>
-                        <button onClick={() => { onRemoveMail(mail.id) }}>🗑️</button>
-                        <button onClick={() => { onToggleRead(mail)}}>{!mail.isRead ? '📨' : '✉️'}</button>
+                        <button onClick={() => { onRemoveMail(mail.id) }}>
+                            <span class="material-symbols-outlined">delete</span>
+                        </button>
+                        <button onClick={() => { onToggleRead(mail) }}>
+                            {!mail.isRead
+                                ? <span class="material-symbols-outlined">mark_email_read</span>
+                                : <span class="material-symbols-outlined">mark_email_unread</span>}
+                        </button>
                     </div>
                 </li>
             )}

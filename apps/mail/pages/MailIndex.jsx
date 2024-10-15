@@ -79,14 +79,16 @@ export function MailIndex() {
         <div>
             <div className="mail-main">
                 <div className="mail-folders">
-                    <Link to="/mail/compose">✎ Compose</Link>
+                    <Link to="/mail/compose">
+                    <span class="material-symbols-outlined">edit</span> 
+                    Compose</Link>
                     <MailFolderList onSetFilter={onSetFilter} stats={stats} />
                 </div>
                 <div className="mail-content">
-                <MailFilter onSetFilter={onSetFilter} filterBy={filterBy} />
-                <MailList mails={mails} onRemoveMail={onRemoveMail} onToggleRead={onToggleRead} />
+                    <MailFilter onSetFilter={onSetFilter} filterBy={filterBy} />
+                    <MailList mails={mails} onRemoveMail={onRemoveMail} onToggleRead={onToggleRead} />
                 </div>
-                <nav className="side-nav">x</nav>
+                <nav className="side-nav"></nav>
                 <Outlet />
             </div>
         </div>)
