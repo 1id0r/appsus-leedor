@@ -1,0 +1,80 @@
+
+
+ .about {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 12px;
+    max-width: 800px;
+    width: 100%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+}
+
+
+.about h1 {
+    font-size: 2.2rem;
+    color: #ffc300;
+    /* Google's primary blue */
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.about h2 {
+    font-size: 1.6rem;
+    color: #003566;
+    margin-bottom: 15px;
+}
+
+.about p,
+.about ul {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    line-height: 1.2lh;
+}
+
+.about ul {
+    padding-left: 20px;
+    list-style: none;
+}
+
+.about li {
+    margin-bottom: 10px;
+}
+
+.about li strong {
+}
+
+.about strong {
+    color: #001d3d;
+}
+
+.about a {
+    color: #1a73e8;
+    text-decoration: none;
+}
+
+.about a:hover {
+    text-decoration: underline;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .about .about-page {
+        padding: 20px;
+    }
+
+    .about h1 {
+        font-size: 1.8rem;
+    }
+
+    .about h2 {
+        font-size: 1.4rem;
+    }
+
+    .about p,
+    .about ul {
+        font-size: 1rem;
+    }
+}
