@@ -38,7 +38,7 @@ export function MailFilter({ filterBy, onSetFilter }) {
     return (
         <section className="mail-filter">
                 <button onClick={onSearch}>
-                    <span class="material-symbols-outlined">search</span>
+                    <span className="material-symbols-outlined">search</span>
                 </button>
                 <input
                     onChange={handleChange}
@@ -48,11 +48,11 @@ export function MailFilter({ filterBy, onSetFilter }) {
                     placeholder="Search mail" />
                 {txt ?
                     <button onClick={onClearSearch} className="filter-clear">
-                        <span class="material-symbols-outlined">close</span>
+                        <span className="material-symbols-outlined">close</span>
                     </button>
                     : ''}
                 <button>
-                    <span class="material-symbols-outlined">tune</span>
+                    <span className="material-symbols-outlined">tune</span>
                 </button>
         </section>
     )

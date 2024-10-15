@@ -13,11 +13,12 @@ export function MailIndex() {
 
     const [mails, setMails] = useState(null)
     const [filterBy, setFilterBy] = useState(mailService.getDefaultFilter())
+    const [sortBy, setSortBy] = useState(mailService.getDefaultSort())
     const [stats, setStats] = useState(null)
 
     useEffect(() => {
         loadMails()
-    }, [filterBy])
+    }, [filterBy, sortBy])
 
     function loadMails() {
         mailService.query(filterBy)
@@ -72,6 +73,16 @@ export function MailIndex() {
         setFilterBy(filterBy => ({ ...filterBy, ...filterByToEdit }))
     }
 
+    function onSetSort(sort) {
+        setSortBy(sortBy => {
+            const newSort = sortBy
+            if(!newSort[sort]) newSort[sort]= 1
+            else newSort[sort] *= -1
+            console.log(newSort)
+            return newSort
+        })
+    }
+
     if (!mails) return <div>Loading..</div>
 
 
@@ -80,13 +91,14 @@ export function MailIndex() {
             <div className="mail-main">
                 <div className="mail-folders">
                     <Link to="/mail/compose">
-                    <span class="material-symbols-outlined">edit</span> 
-                    Compose</Link>
+                        <span className="material-symbols-outlined">edit</span>
+                        <span>Compose</span>
+                    </Link>
                     <MailFolderList onSetFilter={onSetFilter} stats={stats} />
                 </div>
                 <div className="mail-content">
                     <MailFilter onSetFilter={onSetFilter} filterBy={filterBy} />
-                    <MailList mails={mails} onRemoveMail={onRemoveMail} onToggleRead={onToggleRead} />
+                    <MailList mails={mails} onRemoveMail={onRemoveMail} onToggleRead={onToggleRead} sortBy={sortBy} onSetSort={onSetSort} />/>
                 </div>
                 <nav className="side-nav"></nav>
                 <Outlet />

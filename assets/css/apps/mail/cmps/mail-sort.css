@@ -1,0 +1,9 @@
+.mail-sort{
+    display: flex;
+    justify-content: end;
+}
+
+.mail-sort p{
+    display: flex;
+    font-size: 1em;
+}

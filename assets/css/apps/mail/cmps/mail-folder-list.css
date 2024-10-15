@@ -26,6 +26,10 @@
     width: 95px;
 }
 
+.mail-folder-list p span:nth-child(3){
+    width: 8px;
+}
+
 .mail-folder-list p:hover{
     background-color:  rgba(32, 33, 36, 0.137);
     cursor: pointer;

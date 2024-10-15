@@ -16,29 +16,29 @@ export function MailFolderList({ onSetFilter, stats }) {
     return (
         <section className="mail-folder-list">
             <p onClick={() => onChooseFolder('inbox')}>
-                <span class="material-symbols-outlined">inbox</span>
+                <span className="material-symbols-outlined">inbox</span>
                 <span>Inbox</span>
-                <span>{stats.isRead}</span>
+                <span>{stats.isRead === 0 ? ' ': stats.isRead}</span>
             </p>
             <p onClick={() => onChooseFolder(true)}>
-                <span class="material-symbols-outlined">star</span>
-                <span>starred</span>
-                <span>{stats.starred}</span>
+                <span className="material-symbols-outlined">star</span>
+                <span>Starred</span>
+                <span>{stats.starred === 0 ? ' ': stats.starred}</span>
             </p>
             <p onClick={() => onChooseFolder('sent')}>
-                <span class="material-symbols-outlined">send</span>
+                <span className="material-symbols-outlined">send</span>
                 <span>Sent</span>
-                <span>{stats.sent}</span>
+                <span>{stats.sent === 0 ? ' ': stats.sent}</span>
             </p>
             <p onClick={() => onChooseFolder('draft')}>
-                <span class="material-symbols-outlined">draft</span>
+                <span className="material-symbols-outlined">draft</span>
                 <span>Draft</span>
-                <span>{stats.draft}</span>
+                <span>{stats.draft === 0 ? ' ': stats.draft}</span>
             </p>
             <p onClick={() => onChooseFolder('trash')}>
-                <span class="material-symbols-outlined">delete</span>
+                <span className="material-symbols-outlined">delete</span>
                 <span>Trash</span>
-                <span>{stats.trash}</span>
+                <span>{stats.trash === 0 ? ' ': stats.trash}</span>
             </p>
         </section>
     )

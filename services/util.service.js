@@ -1,14 +1,14 @@
 export const utilService = {
-    makeId,
-    makeLorem,
-    getRandomIntInclusive,
-    getRandomColor,
-    padNum,
-    getDayName,
-    getMonthName,
-    getRandomTimestamp,
-    loadFromStorage,
-    saveToStorage
+  makeId,
+  makeLorem,
+  getRandomIntInclusive,
+  getRandomColor,
+  padNum,
+  getDayName,
+  getMonthName,
+  getRandomTimestamp,
+  loadFromStorage,
+  saveToStorage
 }
 
 function makeId(length = 6) {
@@ -116,18 +116,10 @@ function loadFromStorage(key) {
   return (data) ? JSON.parse(data) : undefined
 }
 
-function getRandomTimestamp(){
-  const now = new Date();
-    
-  // Get the first day of the current month
-  const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
-  
-  // Get the last day of the current month
-  const endOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0);
-  
-  // Generate a random timestamp between start and end of the month
-  const randomMillis = Math.floor(Math.random() * (endOfMonth.getTime() - startOfMonth.getTime() + 1)) + startOfMonth.getTime();
-  
-  // Return the random timestamp (in milliseconds)
-  return randomMillis
+function getRandomTimestamp() {
+  const now = Date.now()
+  const threeMonthsInMilliseconds = 3 * 30 * 24 * 60 * 60 * 1000
+  const threeMonthsAgo = now - threeMonthsInMilliseconds
+  const randomTimestamp = Math.floor(Math.random() * (now - threeMonthsAgo + 1)) + threeMonthsAgo
+  return randomTimestamp
 }

@@ -2,8 +2,8 @@ const { Link } = ReactRouterDOM
 
 export function MailPreview({ mail}) {
 
-    const { from, subject, createdAt, id } = mail
-    const date = new Date(createdAt)
+    const { from, subject, sentAt, id, body } = mail
+    const date = new Date(sentAt)
 
     const sender = from.split('@')[0]
     
@@ -11,7 +11,7 @@ export function MailPreview({ mail}) {
     return (
             <Link to={`/mail/${id}`} className="mail-preview">
                 <h4>{sender}</h4>
-                <h4>{subject}</h4>
+                <h4>{subject} <span>{body}</span></h4>
                 <h4>{date.getDate()}.{date.getMonth()}</h4>
             </Link>
     )
