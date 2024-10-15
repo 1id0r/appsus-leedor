@@ -13,6 +13,7 @@ export const noteService = {
   getEmptyNote,
   getDefaultFilter,
   togglePin,
+  duplicate,
 }
 
 function query(filterBy = {}) {
@@ -55,6 +56,7 @@ function getEmptyNote() {
     info: { title: '', txt: '', url: '', todos: [] },
   }
 }
+
 function togglePin(noteId) {
   return get(noteId).then((note) => {
     note.isPinned = !note.isPinned
@@ -65,6 +67,12 @@ function getRandomColor() {
   const colors = ['#FF99C8', '#FCF6BD', '#D0F4DE', '#A9DEF9', '#E4C1F9']
   const randomIndex = Math.floor(Math.random() * colors.length)
   return colors[randomIndex]
+}
+function duplicate(noteId) {
+  return get(noteId).then((note) => {
+    const duplicatedNote = { ...note, id: '', createdAt: Date.now() }
+    return save(duplicatedNote)
+  })
 }
 
 function _createNotes() {

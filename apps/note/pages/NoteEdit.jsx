@@ -1,4 +1,4 @@
-const { useNavigate, useParams } = ReactRouterDOM
+const { useNavigate, useParams, useOutletContext } = ReactRouterDOM
 const { useState, useEffect } = React
 
 import { noteService } from '../services/note.service.js'
@@ -8,6 +8,7 @@ export function NoteEdit() {
   const [noteToEdit, setNoteToEdit] = useState(noteService.getEmptyNote())
   const { noteId } = useParams()
   const navigate = useNavigate()
+  const { onUpdateNote } = useOutletContext()
 
   useEffect(() => {
     if (noteId) loadNote()
@@ -48,6 +49,7 @@ export function NoteEdit() {
     noteService
       .save(noteToEdit)
       .then((savedNote) => {
+        onUpdateNote(savedNote)
         navigate('/note')
         showSuccessMsg(`Note Saved (id: ${savedNote.id})`)
       })
@@ -62,18 +64,17 @@ export function NoteEdit() {
 
   return (
     <React.Fragment>
-      <div className='back-drop' onClick={onBack}>
-        <div className='note-edit'>
-          <h3>{noteId ? 'Edit' : 'Add'} Note</h3>
-          <form onSubmit={onSaveNote}>
-            <label htmlFor='title'>title:</label>
-            <input type='text' name='title' value={noteToEdit.info.title || ''} onChange={handleChange} />
-            <label htmlFor='text'>text:</label>
-            <input type='text' name='txt' value={noteToEdit.info.txt || ''} onChange={handleChange} />
+      <div className='back-drop' onClick={onBack}></div>
+      <div className='note-edit'>
+        <h3>{noteId ? 'Edit' : 'Add'} Note</h3>
+        <form onSubmit={onSaveNote}>
+          <label htmlFor='title'>title:</label>
+          <input type='text' name='title' value={noteToEdit.info.title || ''} onChange={handleChange} />
+          <label htmlFor='text'>text:</label>
+          <input type='text' name='txt' value={noteToEdit.info.txt || ''} onChange={handleChange} />
 
-            <button className='edit-btn'>Save</button>
-          </form>
-        </div>
+          <button className='edit-btn'>Save</button>
+        </form>
       </div>
     </React.Fragment>
   )

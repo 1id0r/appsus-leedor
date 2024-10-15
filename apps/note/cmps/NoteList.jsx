@@ -3,7 +3,7 @@ const { Link } = ReactRouterDOM
 import { NotePreview } from './NotePreview.jsx'
 
 // return <NotePreview />
-export function NoteList({ notes, onRemoveNote, onTogglePin }) {
+export function NoteList({ notes, onRemoveNote, onTogglePin, onDuplicateNote }) {
   //   console.log(notes)
   const pinnedNotes = notes.filter((note) => note.isPinned)
   const unpinnedNotes = notes.filter((note) => !note.isPinned)
@@ -21,6 +21,10 @@ export function NoteList({ notes, onRemoveNote, onTogglePin }) {
             <img src='assets/img/edit.svg' alt='edit' />
           </button>
         </Link>
+        <button onClick={() => onDuplicateNote(note.id)}>
+          {' '}
+          <img src='assets/img/duplicate.svg' alt='duplicate' />
+        </button>
       </section>
       <button className='pin-btn' onClick={() => onTogglePin(note.id)}>
         {note.isPinned ? (

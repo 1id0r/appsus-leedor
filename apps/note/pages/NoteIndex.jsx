@@ -1,4 +1,5 @@
 const { useState, useEffect } = React
+const { Outlet } = ReactRouterDOM
 
 import { showErrorMsg, showSuccessMsg } from '../../../services/event-bus.service.js'
 import { NoteList } from '../cmps/NoteList.jsx'
@@ -37,9 +38,35 @@ export function NoteIndex() {
       )
     })
   }
+  function onDuplicateNote(noteId) {
+    noteService
+      .duplicate(noteId)
+      .then((duplicatedNote) => {
+        setNotes((prevNotes) => [...prevNotes, duplicatedNote])
+        showSuccessMsg('Note duplicated successfully')
+      })
+      .catch((err) => {
+        console.log('Problems duplicating note:', err)
+        showErrorMsg(`Problems duplicating note (${noteId})`)
+      })
+  }
+  function onToggleTodo(noteId, todoIndex) {
+    noteService
+      .toggleTodo(noteId, todoIndex)
+      .then((updatedNote) => {
+        setNotes((prevNotes) => prevNotes.map((note) => (note.id === updatedNote.id ? updatedNote : note)))
+      })
+      .catch((err) => {
+        console.log('Problems toggling todo:', err)
+        showErrorMsg(`Problems toggling todo`)
+      })
+  }
 
   function onSetFilter(filterByToEdit) {
     setFilterBy((filterBy) => ({ ...filterBy, ...filterByToEdit }))
+  }
+  function onUpdateNote(updatedNote) {
+    setNotes((prevNotes) => prevNotes.map((note) => (note.id === updatedNote.id ? updatedNote : note)))
   }
 
   if (!notes) return <div>Loading</div>
@@ -48,8 +75,15 @@ export function NoteIndex() {
       <div className='filter-container'>
         <NoteFilter filterBy={filterBy} onSetFilter={onSetFilter} />
       </div>
+      <Outlet context={{ onUpdateNote }} />
       <NoteAdd loadNotes={loadNotes} />
-      <NoteList onTogglePin={onTogglePin} onRemoveNote={onRemoveNote} notes={notes} />
+      <NoteList
+        onDuplicateNote={onDuplicateNote}
+        onToggleTodo={onToggleTodo}
+        onTogglePin={onTogglePin}
+        onRemoveNote={onRemoveNote}
+        notes={notes}
+      />
     </React.Fragment>
   )
 }

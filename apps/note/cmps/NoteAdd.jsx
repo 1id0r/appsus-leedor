@@ -6,7 +6,7 @@ import { showErrorMsg, showSuccessMsg } from '../../../services/event-bus.servic
 
 export function NoteAdd({ loadNotes }) {
   const [noteToAdd, setNoteToAdd] = useState(noteService.getEmptyNote())
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
 
   useEffect(() => {
     loadNotes()
@@ -27,7 +27,7 @@ export function NoteAdd({ loadNotes }) {
     }
     if (field === 'backgroundColor') {
       setNoteToAdd((prevNote) => ({ ...prevNote, style: { ...prevNote.style, [field]: value } }))
-    } else if (['txt', 'title', 'url'].includes(field)) {
+    } else if (['txt', 'title', 'url', 'todos'].includes(field)) {
       setNoteToAdd((prevNote) => ({ ...prevNote, info: { ...prevNote.info, [field]: value } }))
     } else {
       setNoteToAdd((prevNote) => ({ ...prevNote, [field]: value }))
@@ -36,6 +36,14 @@ export function NoteAdd({ loadNotes }) {
   function onSaveNote(ev) {
     console.log(noteToAdd)
     ev.preventDefault()
+    if (noteToAdd.type === 'NoteTodos') {
+      const todos = noteToAdd.info.todos.split(',').map((todo) => ({
+        txt: todo.trim(),
+        isDone: false,
+      }))
+      noteToAdd.info.todos = todos
+      delete noteToAdd.info.txt
+    }
     noteService
       .save(noteToAdd)
       .then((savedNote) => {
@@ -62,9 +70,21 @@ export function NoteAdd({ loadNotes }) {
           <input type='text' placeholder='Title' name='title' value={noteToAdd.info.title} onChange={handleChange} />
           <input
             type='text'
-            placeholder={noteToAdd.type === 'NoteTxt' ? 'Take a note...' : 'Enter url...'}
-            name={noteToAdd.type === 'NoteImg' ? 'url' : 'txt'}
-            value={noteToAdd.type === 'NoteImg' ? noteToAdd.info.url : noteToAdd.info.txt}
+            placeholder={
+              noteToAdd.type === 'NoteTxt'
+                ? 'Take a note...'
+                : noteToAdd.type === 'NoteTodos'
+                ? 'Enter tasks separated by commas...'
+                : 'Enter url...'
+            }
+            name={noteToAdd.type === 'NoteImg' ? 'url' : noteToAdd.type === 'NoteTodos' ? 'todos' : 'txt'}
+            value={
+              noteToAdd.type === 'NoteImg'
+                ? noteToAdd.info.url
+                : noteToAdd.type === 'NoteTodos'
+                ? noteToAdd.info.todos
+                : noteToAdd.info.txt
+            }
             onChange={handleChange}
           />
         </div>
@@ -78,6 +98,9 @@ export function NoteAdd({ loadNotes }) {
             </button>
             <button type='button' onClick={() => handleTypeChange('NoteVideo')}>
               <img src='assets/img/movie.svg' alt='video' />
+            </button>
+            <button type='button' onClick={() => handleTypeChange('NoteTodos')}>
+              todo
             </button>
           </div>
           <button type='submit' className='save-button'>

@@ -1,108 +1,110 @@
 const { Link, Outlet } = ReactRouterDOM
 const { useState, useEffect } = React
 
+import { MailFilter } from '../cmps/MailFilter.jsx'
+import { MailFolderList } from '../cmps/MailFolderList.jsx'
+import { MailList } from '../cmps/MailList.jsx'
 
-import { MailFilter } from "../cmps/MailFilter.jsx"
-import { MailFolderList } from "../cmps/MailFolderList.jsx"
-import { MailList } from "../cmps/MailList.jsx"
-
-import { mailService } from "../services/mail.service.js"
-
+import { mailService } from '../services/mail.service.js'
 
 export function MailIndex() {
+  const [mails, setMails] = useState(null)
+  const [filterBy, setFilterBy] = useState(mailService.getDefaultFilter())
+  const [sortBy, setSortBy] = useState(mailService.getDefaultSort())
+  const [stats, setStats] = useState(null)
 
-    const [mails, setMails] = useState(null)
-    const [filterBy, setFilterBy] = useState(mailService.getDefaultFilter())
-    const [sortBy, setSortBy] = useState(mailService.getDefaultSort())
-    const [stats, setStats] = useState(null)
+  useEffect(() => {
+    loadMails()
+  }, [filterBy, sortBy])
 
-    useEffect(() => {
-        loadMails()
-    }, [filterBy, sortBy])
+  function loadMails() {
+    mailService
+      .query(filterBy)
+      .then((mails) => {
+        setMails(mails)
+        loadStats(mails)
+      })
+      .catch((err) => {
+        console.log('err loading mails', err)
+      })
+  }
 
-    function loadMails() {
-        mailService.query(filterBy)
-            .then(mails => {
-                setMails(mails)
-                loadStats(mails)
-            })
-            .catch(err => {
-                console.log('err loading mails', err)
-            })
+  function loadStats(mails) {
+    setStats(mailService.getStats(mails))
+  }
 
-    }
-
-    function loadStats(mails) {
-        setStats(mailService.getStats(mails))
-
-    }
-
-    function onRemoveMail(mailId) {
-        mailService.remove(mailId)
-            .then(() => {
-                setMails(mails => {
-                    mails.filter(mail => mail.id !== mailId)
-                })
-            })
-            .catch(err => {
-                console.log('err removing mail' + mailId, err)
-            })
-    }
-
-    function onToggleRead(mail) {
-        console.log(mail)
-        mail.isRead = !mail.isRead
-        mailService.save(mail)
-            .then(updatedMail => {
-                const idx = mails.findIndex(prevMail => prevMail.id === mail.id)
-                setMails(prevMails => {
-                    const newMails = [...prevMails]
-                    newMails[idx] = updatedMail
-                    return newMails
-                })
-                loadStats(mails)
-            })
-            .catch(err => {
-                console.log('err editing mail' + mail.id, err)
-            })
-    }
-
-
-    function onSetFilter(filterByToEdit) {
-        if (!filterByToEdit) setFilterBy(mailService.getDefaultFilter())
-        setFilterBy(filterBy => ({ ...filterBy, ...filterByToEdit }))
-    }
-
-    function onSetSort(sort) {
-        setSortBy(sortBy => {
-            const newSort = sortBy
-            if(!newSort[sort]) newSort[sort]= 1
-            else newSort[sort] *= -1
-            console.log(newSort)
-            return newSort
+  function onRemoveMail(mailId) {
+    mailService
+      .remove(mailId)
+      .then(() => {
+        setMails((mails) => {
+          mails.filter((mail) => mail.id !== mailId)
         })
-    }
+      })
+      .catch((err) => {
+        console.log('err removing mail' + mailId, err)
+      })
+  }
 
-    if (!mails) return <div>Loading..</div>
+  function onToggleRead(mail) {
+    console.log(mail)
+    mail.isRead = !mail.isRead
+    mailService
+      .save(mail)
+      .then((updatedMail) => {
+        const idx = mails.findIndex((prevMail) => prevMail.id === mail.id)
+        setMails((prevMails) => {
+          const newMails = [...prevMails]
+          newMails[idx] = updatedMail
+          return newMails
+        })
+        loadStats(mails)
+      })
+      .catch((err) => {
+        console.log('err editing mail' + mail.id, err)
+      })
+  }
 
+  function onSetFilter(filterByToEdit) {
+    if (!filterByToEdit) setFilterBy(mailService.getDefaultFilter())
+    setFilterBy((filterBy) => ({ ...filterBy, ...filterByToEdit }))
+  }
 
-    return (
-        <div>
-            <div className="mail-main">
-                <div className="mail-folders">
-                    <Link to="/mail/compose">
-                        <span className="material-symbols-outlined">edit</span>
-                        <span>Compose</span>
-                    </Link>
-                    <MailFolderList onSetFilter={onSetFilter} stats={stats} />
-                </div>
-                <div className="mail-content">
-                    <MailFilter onSetFilter={onSetFilter} filterBy={filterBy} />
-                    <MailList mails={mails} onRemoveMail={onRemoveMail} onToggleRead={onToggleRead} sortBy={sortBy} onSetSort={onSetSort} />/>
-                </div>
-                <nav className="side-nav"></nav>
-                <Outlet />
-            </div>
-        </div>)
+  function onSetSort(sort) {
+    setSortBy((sortBy) => {
+      const newSort = sortBy
+      if (!newSort[sort]) newSort[sort] = 1
+      else newSort[sort] *= -1
+      console.log(newSort)
+      return newSort
+    })
+  }
 
+  if (!mails) return <div>Loading..</div>
+
+  return (
+    <div>
+      <div className='mail-main'>
+        <div className='mail-folders'>
+          <Link to='/mail/compose'>
+            <span className='material-symbols-outlined'>edit</span>
+            <span>Compose</span>
+          </Link>
+          <MailFolderList onSetFilter={onSetFilter} stats={stats} />
+        </div>
+        <div className='mail-content'>
+          <MailFilter onSetFilter={onSetFilter} filterBy={filterBy} />
+          <MailList
+            mails={mails}
+            onRemoveMail={onRemoveMail}
+            onToggleRead={onToggleRead}
+            sortBy={sortBy}
+            onSetSort={onSetSort}
+          />
+        </div>
+        <nav className='side-nav'></nav>
+        <Outlet />
+      </div>
+    </div>
+  )
 }
