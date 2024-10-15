@@ -36,20 +36,6 @@ export function NoteList({
         <button onClick={() => onSendAsMail(note.id)}>
           <span class='material-symbols-outlined'>ios_share</span>
         </button>
-        <button onClick={() => setShowPalette(note.id)}>
-          <i className='fas fa-palette'></i> {<span class='material-symbols-outlined'>ios_share</span>}
-        </button>
-        {showPalette === note.id && (
-          <div className='color-palette'>
-            {colors.map((color) => (
-              <button
-                key={color}
-                style={{ backgroundColor: color, border: 'none', width: '30px', height: '30px', borderRadius: '50%' }}
-                onClick={() => handleColorChange(note.id, color)}
-              />
-            ))}
-          </div>
-        )}
       </section>
       <button className='pin-btn' onClick={() => onTogglePin(note.id)}>
         {note.isPinned ? (
