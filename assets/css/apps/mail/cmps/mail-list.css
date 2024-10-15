@@ -3,7 +3,7 @@
  .mail-list {
     list-style: none;
     padding: 0;
-    width: calc(100vw - 205px);
+    width: calc(100vw - 220px);
     border-radius: 1em;
     font-weight: 200;
  }

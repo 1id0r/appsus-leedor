@@ -40,10 +40,9 @@ export function MailDetails() {
     }
 
     function onSaveAsNote(){
-        navigate(`/notes/add?title=${encodeURIComponent(someTitle)}&text=${encodeURIComponent(someText)}`)
+        navigate(`/note/?title=${encodeURIComponent(subject)}&text=${encodeURIComponent(body)}`)
     }
 
- 
     
     return (
         <section className="mail-details">

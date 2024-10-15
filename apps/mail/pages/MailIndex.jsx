@@ -108,6 +108,7 @@ export function MailIndex() {
       return newSort
     })
   }
+
   function onSetSort(sort) {
     const clearSort = mailService.getDefaultSort()
     setSortBy((sortBy) => ({ ...clearSort, [sort]: !sortBy[sort] ? 1 : -sortBy[sort] }))
@@ -141,7 +142,7 @@ export function MailIndex() {
           />
         </div>
         <nav className='side-nav'></nav>
-        <Outlet />
+        <Outlet context={{onUpdateMail}} />
       </div>
     </div>
   )

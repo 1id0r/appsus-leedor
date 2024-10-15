@@ -12,9 +12,6 @@ export function MailCompose({}) {
     const navigate = useNavigate()
     const onUpdateMail= useOutletContext()
 
-    useEffect(()=>{
-    },[])
-
 
     function handleChange({ target }) {
         const field = target.name
