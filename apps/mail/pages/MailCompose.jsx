@@ -1,13 +1,14 @@
 const { useState } = React
-const { useNavigate } = ReactRouterDOM
+const { useNavigate, useOutletContext } = ReactRouterDOM
 
 import { mailService } from "../services/mail.service.js"
 import { showErrorMsg, showSuccessMsg } from '../../../services/event-bus.service.js'
 
-export function MailCompose() {
+export function MailCompose({}) {
 
     const [mailToComp, setMailtoComp] = useState(mailService.getEmptyMail())
     const navigate = useNavigate()
+    const onUpdateMail= useOutletContext()
 
 
     function handleChange({ target }) {
@@ -26,10 +27,11 @@ export function MailCompose() {
         setMailtoComp(prevMailToComp => ({ ...prevMailToComp, [field]: value }))
     }
 
-    function onSaveMail(ev){
+    function onSaveMail(ev) {
         ev.preventDefault()
         mailService.save(mailToComp)
-            .then(mail => {
+            .then(savedMail => {
+                onUpdateMail(savedMail)
                 showSuccessMsg('mail sent successfully')
             })
             .catch(err => {
@@ -51,8 +53,8 @@ export function MailCompose() {
             <div className="back-drop" onClick={onBack}></div>
             <div className="mail-compose">
                 <header>
-                <h3>New Message</h3>
-                <button onClick={onBack}>x</button>
+                    <h3>New Message</h3>
+                    <button onClick={onBack}>x</button>
                 </header>
                 <form onSubmit={onSaveMail}>
                     <input
@@ -72,16 +74,16 @@ export function MailCompose() {
                         placeholder="Subject"
                         required>
                     </input>
-                    <input className="big"
+                    <textarea
+                        className="big"
                         onChange={handleChange}
                         name="body"
-                        type="text"
                         value={mailToComp.body}
                         placeholder="Your mail here..">
-                    </input>
+                    </textarea>
                     <button>Send</button>
                 </form>
             </div>
-        </React.Fragment>
+        </React.Fragment >
     )
 }

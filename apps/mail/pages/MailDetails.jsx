@@ -12,7 +12,7 @@ export function MailDetails() {
 
     useEffect(() => {
         loadMail()
-    }, [])
+    }, [mailId])
 
     function loadMail() {
         mailService.get(mailId)
@@ -36,45 +36,50 @@ export function MailDetails() {
 
     if (!mail) return <div>Loading..</div>
 
-    const { from, to, subject, body, createdAt } = mail
-    const date = new Date(createdAt)
-
-
+    const { from, to, subject, body, sentAt } = mail
+    const date = new Date(sentAt)
+    
     return (
         <section className="mail-details">
-            <div>
-                <button>Archive</button>
-                <button>Spam</button>
-                <button onClick={() => { onRemoveMail(mail.id) }}>delete</button>
+            <div className="top-btns">
+                <button><span class="material-symbols-outlined">archive</span></button>
+                <button><span class="material-symbols-outlined">report</span></button>
+                <button onClick={() => { onRemoveMail(mail.id) }}><span class="material-symbols-outlined">delete</span></button>
                 |
-                <button>Unread</button>
-                <button>Snooze</button>
-                <button>Notes</button>
+                <button><span class="material-symbols-outlined">mark_email_unread</span></button>
+                <button><span class="material-symbols-outlined">schedule</span></button>
+                <button><img src='assets/img/keep.svg' alt='keep' /></button>
                 |
-                <button>Move to</button>
-                <button>Label</button>
-                <button>⋮</button>
-                <button ><Link to={`/mail/${mail.prevMailId}`}>≺</Link></button>
-                <button ><Link to={`/mail/${mail.nextMailId}`}>≻</Link></button>
+                <button><span class="material-symbols-outlined">drive_file_move</span></button>
+                <button><span class="material-symbols-outlined">label</span></button>
+                <button><span class="material-symbols-outlined">more_vert</span></button>
+                <button ><Link to={`/mail/${mail.prevMailId}`}><span class="material-symbols-outlined">chevron_left
+                </span></Link></button>
+                <button ><Link to={`/mail/${mail.nextMailId}`}><span class="material-symbols-outlined">chevron_right
+                </span></Link></button>
             </div>
             <main>
                 <h2>{subject}</h2>
-                <header>
-                    <h5>{from}</h5>
-                    <h5>{to}</h5>
-                    <h5>{date.getDate()}</h5>
-                    <button>☆</button>
-                    <button>↰</button>
-                    <button>⋮</button>
-                </header>
+                <div className="sub-header">
+                    <h5>
+                        <span class="from-preview">{from[0]}</span>
+                        <span>{from}</span>
+                    </h5>
+                    <p>
+                        <span>{to}</span>
+                        <span>{date.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })} {date.getHours()}:{date.getMinutes()}</span>
+                        <button><span className="material-symbols-outlined">star</span></button>
+                        <button><span class="material-symbols-outlined">reply</span></button>
+                        <button><span class="material-symbols-outlined">more_vert</span></button>
+                    </p>
+                </div>
             </main>
-            <p>{body}</p>
-            <hr></hr>
+            <p className="mail-body">{body}</p>
             <aside>
-                <button>↰Reply</button>
-                <button>↱Forward</button>
-                <button>☺︎</button>
+                <button><span class="material-symbols-outlined">reply</span> Reply</button>
+                <button><span class="material-symbols-outlined">forward</span> Forward</button>
+                <button><span class="material-symbols-outlined">sentiment_satisfied</span></button>
             </aside>
-        </section>
+        </section >
     )
 }

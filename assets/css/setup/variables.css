@@ -4,5 +4,6 @@
     --mail-unread-color: #ffffff;
     --mail-compose-color: #c2e7ff;
     --mail-search: #eaf1fb;
-    ;
+    --mail-hovered:  #00000010;
+    --mail-dark:  #444746d4;
 }

@@ -2,6 +2,7 @@ const { Link, Outlet } = ReactRouterDOM
 const { useState, useEffect } = React
 
 
+
 import { MailFilter } from "../cmps/MailFilter.jsx"
 import { MailFolderList } from "../cmps/MailFolderList.jsx"
 import { MailList } from "../cmps/MailList.jsx"
@@ -18,10 +19,11 @@ export function MailIndex() {
 
     useEffect(() => {
         loadMails()
+        loadStats(mails)
     }, [filterBy, sortBy])
 
     function loadMails() {
-        mailService.query(filterBy)
+        mailService.query(filterBy, sortBy)
             .then(mails => {
                 setMails(mails)
                 loadStats(mails)
@@ -33,6 +35,7 @@ export function MailIndex() {
     }
 
     function loadStats(mails) {
+        if (!mails) return
         setStats(mailService.getStats(mails))
 
     }
@@ -40,9 +43,8 @@ export function MailIndex() {
     function onRemoveMail(mailId) {
         mailService.remove(mailId)
             .then(() => {
-                setMails(mails => {
-                    mails.filter(mail => mail.id !== mailId)
-                })
+                setMails(mails => 
+                    mails.filter(mail => mail.id !== mailId))
             })
             .catch(err => {
                 console.log('err removing mail' + mailId, err)
@@ -74,13 +76,13 @@ export function MailIndex() {
     }
 
     function onSetSort(sort) {
-        setSortBy(sortBy => {
-            const newSort = sortBy
-            if(!newSort[sort]) newSort[sort]= 1
-            else newSort[sort] *= -1
-            console.log(newSort)
-            return newSort
-        })
+        const clearSort = mailService.getDefaultSort()
+        setSortBy(sortBy => ({ ...clearSort, [sort]: !sortBy[sort] ? 1 : -sortBy[sort] }))
+    }
+
+    function onUpdateMail(savedMail) {
+        setMails(prevMails => [...prevMails, savedMail])
+        loadStats(mails)
     }
 
     if (!mails) return <div>Loading..</div>
@@ -98,10 +100,10 @@ export function MailIndex() {
                 </div>
                 <div className="mail-content">
                     <MailFilter onSetFilter={onSetFilter} filterBy={filterBy} />
-                    <MailList mails={mails} onRemoveMail={onRemoveMail} onToggleRead={onToggleRead} sortBy={sortBy} onSetSort={onSetSort} />/>
+                    <MailList mails={mails} onRemoveMail={onRemoveMail} onToggleRead={onToggleRead} sortBy={sortBy} onSetSort={onSetSort} />
                 </div>
                 <nav className="side-nav"></nav>
-                <Outlet />
+                <Outlet context={onUpdateMail} />
             </div>
         </div>)
 

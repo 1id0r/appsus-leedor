@@ -58,6 +58,8 @@ function query(filterBy = {}, sortBy={}) {
             if (filterBy.starred) {
                 mails = mails.filter(mail => mail.isStarred === filterBy.starred)
             }
+            if(sortBy.date) mails.sort((a,b)=>(a.sentAt - b.sentAt)* sortBy.date)
+            if(sortBy.title) mails.sort((a,b)=>(a.subject.localeCompare(b.subject)* sortBy.title))
             return mails
         })
 }
@@ -98,7 +100,7 @@ function getDefaultFilter() {
 
 function getDefaultSort() {
     return {
-        date: 1, 
+        date: '', 
         title: '',
     }
 }

@@ -18,29 +18,53 @@
 
     background-color: #f2f2f2;
     font-size: 14px;
-    height: 20px;
+    height: 40px;
     padding: 10px 1em;
+}
+.mail-compose header button {
+    background: none;
+    border: 0;
+    cursor: pointer;
 }
 
 .mail-compose input{
     border: none;
-    width: calc(80vw - 2em);
+    width: calc(100% - 2em);
     
-    height: 20px;
+    height: 40px;
     padding-block: 10px;
     font-size: 1em;
     margin-inline: 1em;
     border-block-end: 1px solid lightgray;
 }
 
-.mail-compose input:focus{
+.mail-compose input:focus, .big:focus{
     outline: none;
 }
 
-.mail-compose input.big {
-    height: 70vw;
-    border-block-end: none;
+.mail-compose .big {
+    height: calc(80vh - 120px);
+    width: 100%;
+    border: none;
+    font-family: Roboto;
+    padding: 1em;
+    font-size: 1em;
 
+
+}
+
+.mail-compose form button{
+    position: absolute;
+    bottom: 1em;
+    left: 1em;
+
+    width: 106px;
+    height: 35px;
+    color: white;
+    background-color: #0b57d0;
+    border: 0;
+    border-radius: 18px;
+    cursor: pointer;
 }
 
 .back-drop {
@@ -49,5 +73,5 @@
     z-index: 1;
 
     background-color: rgba(129, 129, 129, 0.509);
-
+    cursor: pointer;
 }
