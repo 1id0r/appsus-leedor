@@ -45,7 +45,9 @@ export function NoteIndex() {
   if (!notes) return <div>Loading</div>
   return (
     <React.Fragment>
-      <NoteFilter filterBy={filterBy} onSetFilter={onSetFilter} />
+      <div className='filter-container'>
+        <NoteFilter filterBy={filterBy} onSetFilter={onSetFilter} />
+      </div>
       <NoteAdd loadNotes={loadNotes} />
       <NoteList onTogglePin={onTogglePin} onRemoveNote={onRemoveNote} notes={notes} />
     </React.Fragment>

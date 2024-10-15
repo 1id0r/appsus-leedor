@@ -1,36 +1,35 @@
 .note-preview {
-    position: relative;
-    padding: 16px;
+    width: 100%;
+    display: grid;
+    grid-template-rows: 20px 1fr;
+    gap: 8px;
     border-radius: 8px;
     max-width: 200px;
-    height: 100px;
-    */ display: flex;
-    flex-direction: column;
-    justify-content: top;
-    align-items: left;
+    overflow: hidden;
+    padding: 8px;
 }
 
-.note-preview video {
-    position: relative;
-    border-radius: 8px;
+.note-title {
+    font-size: 1.2em;
+    text-align: left;
+    padding: 5px;
+}
+
+.note-content {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-h2.note-title {
-    font-size: 24px;
-    margin-bottom: 15px;
-    color: #333;
-    position: absolute;
-    top: 8px;
-    left: 20px;
-}
-
-p.note-text {
-    display: flex;
-    flex-direction: column;
     justify-content: left;
-    align-items: left;
+    align-items: first baseline;
+}
+
+.note-text {
+    font-size: 1em;
+    color: #333;
+    text-align: center;
+}
+
+.note-preview img,
+.note-preview video {
+    max-width: 100%;
+    border-radius: 0 0 8px 8px;
+
 }

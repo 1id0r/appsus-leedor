@@ -40,7 +40,6 @@
  .note-actions button {
      background: transparent;
      border: none;
-     color: #9aa0a6;
      cursor: pointer;
      padding: 4px;
      margin-right: 8px;
@@ -61,26 +60,4 @@
  .note-list li:hover .pin-btn {
      opacity: 1;
      visibility: visible;
- }
-
- .note-preview {
-     padding: 16px;
-     color: #e8eaed;
- }
-
- .note-title {
-     font-size: 16px;
-     font-weight: 500;
-     margin-bottom: 8px;
- }
-
- .note-title {
-     font-size: 16px;
-     font-weight: 500;
-     margin-bottom: 8px;
- }
-
- .note-text {
-     font-size: 14px;
-     line-height: 1.5;
  }

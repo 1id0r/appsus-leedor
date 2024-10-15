@@ -26,12 +26,11 @@ export function NoteFilter({ filterBy, onSetFilter }) {
   const { title } = filterByToEdit
 
   return (
-    <section className='book-filter'>
-      <form>
-        <label htmlFor='title'>find:</label>
-        <input onChange={handleChange} type='text' name='title' id='title' value={title}></input>
-        <button>Search</button>
-      </form>
+    <section className='note-filter'>
+      <button>
+        <span class='material-symbols-outlined'>search</span>
+      </button>
+      <input onChange={handleChange} placeholder='search' type='text' name='title' id='title' value={title}></input>
     </section>
   )
 }

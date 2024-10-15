@@ -27,7 +27,7 @@ export function NotePreview({ note }) {
   return (
     <div className='note-preview'>
       <h2 className='note-title'>{note.info.title}</h2>
-      {renderNoteContent()}
+      <div className='note-content'>{renderNoteContent()}</div>
     </div>
   )
 }
