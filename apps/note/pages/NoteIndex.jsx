@@ -63,15 +63,20 @@ export function NoteIndex() {
         showErrorMsg(`Problems toggling todo`)
       })
   }
-  function handleColorChange(noteId, color) {
-    noteService.get(noteId).then((note) => {
-      note.style.backgroundColor = color
-      noteService.save(note).then((updatedNote) => {
-        // Update your state here to re-render the notes with the new color
-        setNotes((prevNotes) => prevNotes.map((n) => (n.id === noteId ? updatedNote : n)))
+  function onUpdateNoteColor(noteId, color) {
+    noteService
+      .get(noteId)
+      .then((note) => {
+        note.style.backgroundColor = color
+        return noteService.save(note)
       })
-    })
-    setShowPalette(null) // Close the palette after selection
+      .then(() => {
+        setNotes((prevNotes) =>
+          prevNotes.map((note) =>
+            note.id === noteId ? { ...note, style: { ...note.style, backgroundColor: color } } : note
+          )
+        )
+      })
   }
   function onSendAsMail(noteId) {
     console.log(noteId)
@@ -109,7 +114,7 @@ export function NoteIndex() {
       <Outlet context={{ onUpdateNote }} />
       <NoteAdd loadNotes={loadNotes} />
       <NoteList
-        setShowPalette={setShowPalette}
+        onUpdateNoteColor={onUpdateNoteColor}
         onSendAsMail={onSendAsMail}
         onDuplicateNote={onDuplicateNote}
         onTogglePin={onTogglePin}

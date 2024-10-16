@@ -1,8 +1,8 @@
 .note-preview {
     display: grid;
-    grid-template-rows: 20px 1fr 50px;
-    grid-template-columns: 1fr;
+    grid-template-rows: 20px auto 50px;
     gap: 8px;
+    width: 100%;
     border-radius: 8px;
     max-width: 250px;
     overflow: hidden;
@@ -29,9 +29,12 @@
 
 .note-preview img,
 .note-preview video {
-    max-width: 80%;
-    margin: 5px 5px 0px 20px;
+    overflow-clip-margin: content-box;
+    overflow: clip;
+    max-width: 100%;
+    margin-top: 10px;
     border-radius: 8px;
+
 
 }
 
