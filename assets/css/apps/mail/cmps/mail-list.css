@@ -5,7 +5,7 @@
     margin-top: 1em;
  }
 
- .mail-list ul{
+ .mail-list ul {
     list-style: none;
     padding: 0;
     margin: 0;
@@ -17,7 +17,7 @@
  }
 
  li.mail {
-   position: relative;
+    position: relative;
     display: flex;
     height: 40px;
 
@@ -28,11 +28,11 @@
  }
 
  .mail-list h5 {
-   height: 48px;
-   background-color: var(--mail-unread-color);
-   border-radius: 1em 1em 0 0;
-   text-align: end;
-   cursor: pointer;
+    height: 48px;
+    background-color: var(--mail-unread-color);
+    border-radius: 1em 1em 0 0;
+    text-align: end;
+    cursor: pointer;
  }
 
  li.mail:last-child {
@@ -48,9 +48,9 @@
     background-color: var(--mail-unread-color);
  }
 
- li div:first-of-type{
-   width: 65px ;
- }
+ /* li div:first-of-type{ 
+  width: 65px ; 
+ } */
 
  .mail-list li button {
     display: none;
@@ -59,7 +59,7 @@
  }
 
  .mail-list li:hover button {
-   position: absolute;
+    position: absolute;
     display: inline;
     cursor: pointer;
     padding: 6.5px 3px;
@@ -69,11 +69,12 @@
     border-radius: 50%;
  }
 
- .mail-list li:hover button:nth-child(2){
-   inset-inline-end: 5px;
+ .mail-list li:hover button:nth-child(2) {
+    inset-inline-end: 5px;
  }
+
  .mail-list li:hover button:hover {
-   background-color: #00000010;
+    background-color: #00000010;
  }
 
 
@@ -81,7 +82,7 @@
     font-size: 18px;
  }
 
- .mail-list .material-symbols-outlined{
+ .mail-list .material-symbols-outlined {
     text-align: center;
     width: 30px;
  }

@@ -1,6 +1,6 @@
 const { useState } = React
 export function NotePreview({ note, onToggleTodo, onUpdateNoteColor }) {
-  const [showPalette, setShowPalette] = useState(true)
+  const [showPalette, setShowPalette] = useState(false)
 
   const colors = ['#FF99C8', '#FCF6BD', '#D0F4DE', '#A9DEF9', '#E4C1F9']
 
@@ -50,7 +50,11 @@ export function NotePreview({ note, onToggleTodo, onUpdateNoteColor }) {
       <h2 className='note-title'>{note.info.title}</h2>
       <div className='note-content'>{renderNoteContent()}</div>
       <div className='note-pallette'>
-        <button onClick={() => setShowPalette(!showPalette)}>palette</button>
+        <button className='palette-btn' onClick={() => setShowPalette(!showPalette)}>
+          <span className='material-symbols-outlined' style={{ color: note.style.backgroundColor }}>
+            palette
+          </span>
+        </button>
         {showPalette && (
           <div className='color-palette'>
             {colors.map((color) => (
