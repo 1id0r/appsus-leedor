@@ -17,8 +17,6 @@ import { BookEdit } from './apps/books/pages/BookEdit.jsx'
 import { Dashboard } from './apps/books/pages/Dashboard.jsx'
 
 export function App() {
-  const [page, setPage] = useState('home')
-  console.log(page)
 
   return (
     <Router>
@@ -35,12 +33,12 @@ export function App() {
             <Route path='/note/edit/:noteId' element={<NoteEdit />} />
           </Route>
           <Route path='/note/add' element={<NoteAdd />} />
-          {/* <Route path='/book' element={<BookIndex />}>
+          <Route path='/book' element={<BookIndex />}>
             <Route path='/book/edit/' element={<BookEdit />} />
             <Route path='/book/edit/:bookId' element={<BookEdit />} />
           </Route>
           <Route path='/book/:bookId' element={<BookDetails />} />
-          <Route path='/book/Dashboard' element={<Dashboard />} /> */}
+          <Route path='/book/Dashboard' element={<Dashboard />} />
         </Routes>
       </section>
     </Router>
