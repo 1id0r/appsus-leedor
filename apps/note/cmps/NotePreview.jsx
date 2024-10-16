@@ -49,12 +49,8 @@ export function NotePreview({ note, onToggleTodo, onUpdateNoteColor }) {
     <div className='note-preview' style={{ backgroundColor: note.style.backgroundColor }}>
       <h2 className='note-title'>{note.info.title}</h2>
       <div className='note-content'>{renderNoteContent()}</div>
-      <div className='note-actions'>
-        <button onClick={() => setShowPalette(!showPalette)}>
-          <span className='material-symbols-outlined' style={{ color: note.style.backgroundColor }}>
-            palette
-          </span>
-        </button>
+      <div className='note-pallette'>
+        <button onClick={() => setShowPalette(!showPalette)}>palette</button>
         {showPalette && (
           <div className='color-palette'>
             {colors.map((color) => (
