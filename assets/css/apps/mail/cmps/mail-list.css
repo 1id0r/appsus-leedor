@@ -1,11 +1,19 @@
  /* mail list */
 
  .mail-list {
+    width: 100%;
+    margin-top: 1em;
+ }
+
+ .mail-list ul{
     list-style: none;
     padding: 0;
-    width: calc(100vw - 220px);
+    margin: 0;
     border-radius: 1em;
     font-weight: 200;
+    overflow: scroll;
+    max-height: 80vh;
+    border-radius: 1em;
  }
 
  li.mail {
@@ -19,7 +27,7 @@
 
  }
 
- .mail-list li:first-child {
+ .mail-list h5 {
    height: 48px;
    background-color: var(--mail-unread-color);
    border-radius: 1em 1em 0 0;
@@ -32,15 +40,16 @@
     border-block-end: 1px solid rgba(128, 128, 128, 0.105);
  }
 
-
  li.mail.read {
     background-color: var(--mail-read-color);
  }
 
-
-
  li.mail.unread {
     background-color: var(--mail-unread-color);
+ }
+
+ li div:first-of-type{
+   width: 65px ;
  }
 
  .mail-list li button {
@@ -55,17 +64,16 @@
     cursor: pointer;
     padding: 6.5px 3px;
     inset-block-start: 3px;
-    inset-inline-end: 50px;
+    inset-inline-end: 35px;
 
     border-radius: 50%;
  }
 
  .mail-list li:hover button:nth-child(2){
-   inset-inline-end: 10px;
+   inset-inline-end: 5px;
  }
  .mail-list li:hover button:hover {
    background-color: #00000010;
-
  }
 
 
@@ -73,12 +81,7 @@
     font-size: 18px;
  }
 
- .mail-list .material-symbols-outlined:first-child {
-    text-align: center;
-    width: 30px;
- }
-
- .mail-list .material-symbols-outlined:nth-child(1) {
+ .mail-list .material-symbols-outlined{
     text-align: center;
     width: 30px;
  }

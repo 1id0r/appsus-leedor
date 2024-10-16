@@ -17,8 +17,6 @@ import { BookEdit } from './apps/books/pages/BookEdit.jsx'
 import { Dashboard } from './apps/books/pages/Dashboard.jsx'
 
 export function App() {
-  const [page, setPage] = useState('home')
-  console.log(page)
 
   return (
     <Router>

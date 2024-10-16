@@ -1,6 +1,6 @@
 const { Link, NavLink } = ReactRouterDOM
 
-export function Home({ onSetPage }) {
+export function Home() {
 
     return <section className="home">
         <h1><span>Lee</span><span>Dor</span></h1>

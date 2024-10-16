@@ -7,10 +7,11 @@ export function MailList({ mails, onRemoveMail, onToggleRead, sortBy, onSetSort 
 
 
     return (
-        <ul className="mail-list">
-            <li>
+        <div className="mail-list">
+            <h5>
                 <MailSort sortBy={sortBy} onSetSort={onSetSort} />
-            </li>
+            </h5>
+            <ul>
             {mails.map((mail) =>
                 <li key={mail.id} className={`mail ${mail.isRead ? 'read' : 'unread'}`}>
                     <div>
@@ -30,5 +31,6 @@ export function MailList({ mails, onRemoveMail, onToggleRead, sortBy, onSetSort 
                     </div>
                 </li>
             )}
-        </ul>)
+            </ul>
+        </div>)
 }
