@@ -1,4 +1,4 @@
-const { useNavigate, useParams, useLocation } = ReactRouterDOM
+const { useLocation } = ReactRouterDOM
 const { useState, useEffect } = React
 
 import { noteService } from '../services/note.service.js'
@@ -6,15 +6,17 @@ import { showErrorMsg, showSuccessMsg } from '../../../services/event-bus.servic
 
 export function NoteAdd({ loadNotes }) {
   const [noteToAdd, setNoteToAdd] = useState(noteService.getEmptyNote())
+  const [showPalette, setShowPalette] = useState(false)
+
   const location = useLocation()
 
+  const colors = ['#FF99C8', '#FCF6BD', '#D0F4DE', '#A9DEF9', '#E4C1F9']
+
   useEffect(() => {
-    // Parse URL parameters
     const searchParams = new URLSearchParams(location.search)
     const title = searchParams.get('title')
     const text = searchParams.get('text')
 
-    // Update noteToAdd if URL parameters are present
     if (title || text) {
       setNoteToAdd((prevNote) => ({
         ...prevNote,
@@ -48,6 +50,14 @@ export function NoteAdd({ loadNotes }) {
       setNoteToAdd((prevNote) => ({ ...prevNote, [field]: value }))
     }
   }
+  function handleColorChange(color) {
+    setNoteToAdd((prevNote) => ({
+      ...prevNote,
+      style: { ...prevNote.style, backgroundColor: color },
+    }))
+    setShowPalette(false)
+  }
+
   function onSaveNote(ev) {
     console.log(noteToAdd)
     let noteToSave = { ...noteToAdd }
@@ -65,12 +75,14 @@ export function NoteAdd({ loadNotes }) {
       .then((savedNote) => {
         showSuccessMsg(`Note Saved (id: ${savedNote.id})`)
         loadNotes()
+        setNoteToAdd(noteService.getEmptyNote())
       })
       .catch((err) => {
         showErrorMsg('Cannot save note')
         console.log('err:', err)
       })
   }
+
   function handleTypeChange(newType) {
     setNoteToAdd((prevNote) => ({ ...prevNote, type: newType }))
   }
@@ -80,7 +92,7 @@ export function NoteAdd({ loadNotes }) {
   }
 
   return (
-    <section className='note-add'>
+    <section className='note-add' style={{ backgroundColor: noteToAdd.style.backgroundColor }}>
       <form onSubmit={onSaveNote}>
         <div className='note-add-content'>
           <input type='text' placeholder='Title' name='title' value={noteToAdd.info.title} onChange={handleChange} />
@@ -118,6 +130,24 @@ export function NoteAdd({ loadNotes }) {
             <button type='button' onClick={() => handleTypeChange('NoteTodos')}>
               <span class='material-symbols-outlined'>list</span>
             </button>
+            <div className='add-color-picker-container'>
+              <button type='button' onClick={() => setShowPalette(!showPalette)} className='add-color-picker-button'>
+                <span className='material-symbols-outlined'>palette</span>
+              </button>
+              {showPalette && (
+                <div className='add-color-palette'>
+                  {colors.map((color) => (
+                    <button
+                      key={color}
+                      className='add-color-option'
+                      style={{ backgroundColor: color }}
+                      onClick={() => handleColorChange(color)}
+                      type='button'
+                    />
+                  ))}
+                </div>
+              )}
+            </div>
           </div>
           <button type='submit' className='save-button'>
             Add

@@ -8,6 +8,8 @@
     overflow: hidden;
     padding: 8px;
     position: relative;
+    transition: all 0.3s cubic-bezier(.25, .8, .25, 1);
+
 }
 
 .note-title {
@@ -26,6 +28,7 @@
     font-size: 1em;
     color: #333;
     text-align: center;
+    margin-left: 5px;
 }
 
 .note-preview img,
@@ -62,15 +65,35 @@
     height: 14px;
     margin: 0 2px;
     border-radius: 50%;
-    /* ... other existing styles ... */
+    border: 1px solid black;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.note-list li:hover .palette-btn {
+    opacity: 1;
+    visibility: visible;
 }
 
 .palette-btn {
+    transform: scale(0.8);
     position: absolute;
-    bottom: 8px;
+    bottom: 10px;
     right: 8px;
     border: none;
     cursor: pointer;
     border-radius: 50%;
+    border: 1px solid rgb(255, 255, 255);
     background-color: black;
+    opacity: 0.5;
+    opacity: 1;
+    visibility: hidden;
+    transition: opacity 0.2s ease,
+        visibility 0.2s ease;
+}
+
+.color-palette {
+    position: absolute;
+
+    right: 17px;
+
 }

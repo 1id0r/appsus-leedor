@@ -9,7 +9,6 @@ import { NoteAdd } from '../cmps/NoteAdd.jsx'
 export function NoteIndex() {
   const [notes, setNotes] = useState()
   const [filterBy, setFilterBy] = useState(noteService.getDefaultFilter())
-  const [showPalette, setShowPalette] = useState(null)
   const navigate = useNavigate()
 
   useEffect(() => {

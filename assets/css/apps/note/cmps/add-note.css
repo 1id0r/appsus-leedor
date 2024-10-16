@@ -4,7 +4,8 @@
     margin: 20px auto;
     padding: 15px;
     border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
     background-color: #fff;
     position: relative;
 }
@@ -24,6 +25,8 @@
     margin-bottom: 10px;
     border: none;
     font-size: 16px;
+    border: none;
+    background-color: transparent;
 }
 
 .note-add input[type="text"]:focus {
@@ -73,4 +76,33 @@
 
 .pin-button.pinned {
     transform: rotate(45deg);
+}
+
+.add-color-picker-container {
+    position: relative;
+    display: inline-block;
+
+}
+
+.add-color-palette {
+    position: absolute;
+    top: -10px;
+    left: 120px;
+    transform: translateX(-50%);
+    display: flex;
+    background: none;
+    border-radius: 8px;
+    padding: 8px;
+    z-index: 1000;
+    margin-top: 8px;
+}
+
+.add-color-picker-container .add-color-option {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    border: 1px solid black;
+    margin: 0 4px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
 }
