@@ -1,0 +1,118 @@
+.book-add {
+    position: absolute;
+    background-color: var(--mail-search);
+    width: calc(100vw - 380px);
+    height: 48px;
+    line-height: 60px;
+    border-radius: 1.5em;
+    top: 8px;
+    left: 120px;
+}
+
+.book-add:has(.search-res-list){
+    background-color: var(--mail-unread-color);
+    border-radius: 1.5em 1.5em 0 0;
+}
+
+.book-add button {
+    width: 36px;
+    height: 36px;
+    line-height: 0;
+    cursor: pointer;
+
+    padding: 6px;
+    background: none;
+    border: none;
+    border-radius: 50%;
+    outline: none;
+    margin: 6px;
+}
+
+.book-add button:first-child {
+    background-color: #00000010;
+}
+
+.book-add button:hover {
+    background-color: #00000010;
+}
+
+.book-add input {
+    width: calc(100% - 100px);
+    height: 20px;
+    font-size: 1em;
+
+    background: none;
+    border: none;
+    transform: translateY(-6px);
+}
+
+.book-add input:focus {
+    outline: none;
+}
+
+.book-add ul.search-res-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    display: none;
+    z-index: 10;
+
+    list-style: none;
+    padding: 0 .5em;
+    margin: 0;
+    background-color: var(--mail-unread-color);
+    border-radius: 0 0 1em 1em;
+}
+
+.book-add:has(input:focus) ul.search-res-list,
+.book-add:has(.search-res-list) {
+    display: block;
+}
+
+.book-add li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    border-bottom: 1px solid #f1f1f1;
+}
+
+.book-add li p {
+    width: 80%;
+    margin: 0;
+    color: #202124;
+    font-size: .8em;
+    line-height: 1.5;
+    text-align: left;
+    cursor: pointer;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.book-add li p:hover {
+    background-color: #f8f9fa;
+    text-decoration: underline;
+}
+
+.book-add li button {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: transform 0.2s ease-in-out;
+    color: #5f6368;
+}
+
+.book-add li button:hover {
+    transform: scale(1.2);
+    color: #1a73e8;
+}

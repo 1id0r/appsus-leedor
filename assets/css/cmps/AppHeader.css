@@ -9,11 +9,13 @@ header {
     justify-content: space-between;
     align-items: center;
     padding: 15px 0;
+    border: 0;
 }
 
 .app-header .logo {
-    width: 100px;
+    display: block;
     height: 20px;
+    cursor: pointer;
 }
 
 .app-header nav {
@@ -24,15 +26,6 @@ header {
 .app-header nav a {
     margin: .5em;
     height: 20px;
-}
-
-.app-header nav a img {
-    width: 25px;
-    height: 20px;
-}
-
-.app-header nav a:last-child img {
-    width: 18px;
 }
 
 

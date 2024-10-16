@@ -8,7 +8,11 @@ export const utilService = {
   getMonthName,
   getRandomTimestamp,
   loadFromStorage,
-  saveToStorage
+  saveToStorage,
+  debounce,
+  getTruthyValues,
+  animateCSS,
+  getRandomFullNames,
 }
 
 function makeId(length = 6) {
@@ -122,4 +126,62 @@ function getRandomTimestamp() {
   const threeMonthsAgo = now - threeMonthsInMilliseconds
   const randomTimestamp = Math.floor(Math.random() * (now - threeMonthsAgo + 1)) + threeMonthsAgo
   return randomTimestamp
+}
+
+
+function animateCSS(element, animation, prefix = 'animate__') {
+  // We create a Promise and return it
+  return new Promise((resolve, reject) => {
+    const animationName = `${prefix}${animation}`;
+    const node = document.querySelector(element);
+
+    node.classList.add(`${prefix}animated`, animationName);
+
+    // When the animation ends, we clean the classes and resolve the Promise
+    function handleAnimationEnd(event) {
+      event.stopPropagation();
+      node.classList.remove(`${prefix}animated`, animationName);
+      resolve('Animation ended');
+    }
+
+    node.addEventListener('animationend', handleAnimationEnd, { once: true });
+  })
+}
+
+
+function debounce(func, wait = 300) {
+  let timeout
+  return (...args) => {
+    clearTimeout(timeout)
+    timeout = setTimeout(() => {
+      func(...args)
+    }, wait)
+  }
+}
+
+function getTruthyValues(obj) {
+  const newObj = {}
+  for (const key in obj) {
+    if (obj[key] || obj[key] === 0) {
+      newObj[key] = obj[key]
+    }
+  }
+  return newObj
+}
+
+function getRandomFullNames() {
+  const firstNames = ['Alice', 'Bob', 'Charlie', 'Diana', 'Ethan', 'Fiona', 'George', 'Hannah', 'Ian', 'Jasmine'];
+  const lastNames = ['Smith', 'Johnson', 'Williams', 'Jones', 'Brown', 'Davis', 'Miller', 'Wilson', 'Moore', 'Taylor'];
+  
+  const numOfNames = Math.floor(Math.random() * 3) + 1; // 1 to 3
+
+  const fullNames = [];
+
+  for (let i = 0; i < numOfNames; i++) {
+      const randomFirstName = firstNames[Math.floor(Math.random() * firstNames.length)];
+      const randomLastName = lastNames[Math.floor(Math.random() * lastNames.length)];
+      fullNames.push(`${randomFirstName} ${randomLastName}`);
+  }
+
+  return fullNames;
 }

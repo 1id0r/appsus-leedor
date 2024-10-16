@@ -1,0 +1,29 @@
+.dashboard{
+
+}
+
+.dashboard-chart{
+    display: grid;
+    align-items: end;
+    justify-items: center;
+    row-gap: 1em;
+
+    padding: 50px;
+    text-align: center;
+
+}
+
+.dashboard-chart .cat-bar{
+    grid-row: 1/2;
+    background-color: pink;
+    width: 60px
+}
+
+.dashboard-chart .cat-name{
+    grid-row: 2/3;
+    align-self: start;
+    justify-self: center;
+
+    font-size: 10px;
+    width: 60px;
+}

@@ -1,0 +1,66 @@
+.book-edit {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    width: 50vw;
+    max-width: 600px;
+    padding: 1em;
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.book-edit h2 {
+    margin-bottom: 1em;
+    text-align: center;
+    font-size: 1.5em;
+    color: #333;
+}
+
+.book-edit input:not(:last-of-type) {
+    display: block;
+    width: 100%;
+    height: 1.5em;
+    margin-bottom: 1em;
+    padding: 0.5em 1em;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    font-size: 1em;
+    transition: border-color 0.3s ease;
+}
+
+.book-edit input:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
+.book-edit input.big {
+    height: 5em;
+}
+
+.book-edit button {
+    margin-top: 1em;
+    width: 100%;
+    padding: 0.5em;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1em;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.book-edit button:hover {
+    background-color: #0056b3;
+    transform: translateY(-2px);
+}
+
+.back-drop {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.5);
+}

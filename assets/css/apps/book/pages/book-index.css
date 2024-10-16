@@ -1,0 +1,9 @@
+.book-main div:first-child {
+    display: flex;
+    justify-content: space-between;
+    padding: 1em;
+}
+
+.book-main h3 {
+    width: 70vw;
+}

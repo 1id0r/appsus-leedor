@@ -1,39 +1,86 @@
 .home {
-    height: 100vh;
-    overflow: hidden;
-    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+
+    height: calc(100vh - 66px);
+    text-align: center;
+    background-size: cover;
+    background-position: center; /* Center the background image */
+    background-repeat: no-repeat;
+    background-image: url(/assets/img/home-img.jpg);
+
+    padding-inline: 10%;
+    font-family: Roboto, Arial, Helvetica, sans-serif;
 }
 
 .home h1 {
+    display: flex;
+    gap: 1rem;
+    font-size: 10em;
+    letter-spacing: .5rem ;
+    text-transform: uppercase;
+    transition: translate .8s;
+}
+
+.home h1 span{
+    display: inline-block;
+    position: relative;
+}
+
+.home h1 span:first-child{
+    transform: translateY(-2rem); 
+    transition: transform 0.3s ease; 
+}
+
+.home h1 span:last-child::before{
+    content: '';
     position: absolute;
-    top: 20%;
-    left: 50%;
-    translate: -50% -50%;
-    font-size: 200px;
+    top: 0;
+    left: -10px;
+
+    background-color: black;
+    width: 100%;
+    height: 1rem;
+}
+
+.home h1 span:first-child::before{
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: -10px;
+
+    background-color: black;
+    width: 100%;
+    height: 1rem;
+}
+
+.home h1 span:last-child{
+    font-size: 160px;
+    transition: translate .8s;
+}
+
+.home h2 {
+    font-size: 40px;
     transition: translate .8s;
 }
 
 
 .home nav {
-    position: absolute;
-    top: 70%;
-    left: 50%;
-    translate: -50% -50%;
-
     display: flex;
     justify-content: center;
     gap: 2em;
 }
 
 .home nav a img {
-    width: 25px;
+    display: block;
     height: 20px;
+    cursor: pointer;
 }
 
-.home nav a:last-child img {
-    width: 18px;
+.home nav a img:last-of-type{
+    height: 25px;
 }
 
-.home img {
-    width: 100vw;
-}

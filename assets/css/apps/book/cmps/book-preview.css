@@ -1,0 +1,27 @@
+.book-preview{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: .6em;
+    width: 100%;
+    font-size: .8em;
+}
+
+.preview-content {
+    width: 100%;
+    flex: 1;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.book-preview h3, .book-preview p {
+    max-width: 70%;
+    text-transform: capitalize;
+    color: black;
+    overflow: hidden; /* Prevent overflow */
+}
+
+.book-preview img{
+    height: 100px; 
+}

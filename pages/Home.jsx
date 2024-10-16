@@ -4,11 +4,12 @@ export function Home({ onSetPage }) {
 
     return <section className="home">
         <h1><span>Lee</span><span>Dor</span></h1>
-        <img src="assets/img/home-img.jpg"></img>
+        <h2>Streamline your day, one app at a time.</h2>
         <nav className="home-nav">
-            <NavLink onClick={() => onSetPage('about')} to='/about'>About</NavLink>
-            <NavLink onClick={() => onSetPage('gmail')} to='/mail'><img src='assets/img/gmail.svg' alt='Mail' /></NavLink>
-            <NavLink onClick={() => onSetPage('keep')} to='/note'><img src='assets/img/keep.svg' alt='Notes' /></NavLink>
+            <NavLink to='/about'>About</NavLink>
+            <NavLink to='/mail'><img src='assets/img/gmail.svg' alt='Mail' /></NavLink>
+            <NavLink to='/note'><img src='assets/img/keep.svg' alt='Notes' /></NavLink>
+            <NavLink to='/book'><img src='assets/img/book.svg' alt='Books' /></NavLink>
         </nav>
     </section>
 }
