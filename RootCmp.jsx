@@ -11,10 +11,10 @@ import { MailCompose } from './apps/mail/pages/MailCompose.jsx'
 import { NoteIndex } from './apps/note/pages/NoteIndex.jsx'
 import { NoteEdit } from './apps/note/pages/NoteEdit.jsx'
 
-import { BookIndex } from './apps/book/pages/BookIndex.jsx'
-import { BookDetails } from './apps/book/pages/BookDetails.jsx'
-import { BookEdit } from './apps/book/pages/BookEdit.jsx'
-import { Dashboard } from './apps/book/pages/Dashboard.jsx'
+import { BookIndex } from './apps/books/pages/BookIndex.jsx'
+import { BookDetails } from './apps/books/pages/BookDetails.jsx'
+import { BookEdit } from './apps/books/pages/BookEdit.jsx'
+import { Dashboard } from './apps/books/pages/Dashboard.jsx'
 
 export function App() {
   const [page, setPage] = useState('home')
