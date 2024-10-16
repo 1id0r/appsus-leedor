@@ -4,18 +4,23 @@
  }
 
  .note-list {
-     display: flex;
-     flex-wrap: wrap;
-     gap: 16px;
-     padding: 16px;
+     display: grid;
+     grid-template-columns: repeat(auto-fit, minmax(100px, 250px));
+     grid-auto-flow: dense;
+     gap: 10px;
+     break-inside: avoid;
+     overflow: hidden;
+     padding: 60px;
+     margin: 0 auto;
  }
 
  .note-list li {
-     min-width: 240px;
-     min-height: 120px;
+     /* min-width: 240px; */
+     /* min-height: 120px; */
      border-radius: 8px;
      overflow: hidden;
      position: relative;
+     object-fit: cover;
      transition: box-shadow 0.3s ease, transform 0.2s ease;
 
  }
@@ -38,6 +43,7 @@
 
  .note-actions button {
      background: transparent;
+
      border: none;
      cursor: pointer;
      padding: 4px;
