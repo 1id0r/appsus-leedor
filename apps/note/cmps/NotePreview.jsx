@@ -1,4 +1,14 @@
-export function NotePreview({ note, onToggleTodo }) {
+const { useState } = React
+export function NotePreview({ note, onToggleTodo, onUpdateNoteColor }) {
+  const [showPalette, setShowPalette] = useState(true)
+
+  const colors = ['#FF99C8', '#FCF6BD', '#D0F4DE', '#A9DEF9', '#E4C1F9']
+
+  const handleColorChange = (color) => {
+    onUpdateNoteColor(note.id, color)
+    setShowPalette(false)
+  }
+
   function renderNoteContent() {
     switch (note.type) {
       case 'NoteTxt':
@@ -36,9 +46,29 @@ export function NotePreview({ note, onToggleTodo }) {
   }
 
   return (
-    <div className='note-preview'>
+    <div className='note-preview' style={{ backgroundColor: note.style.backgroundColor }}>
       <h2 className='note-title'>{note.info.title}</h2>
       <div className='note-content'>{renderNoteContent()}</div>
+      <div className='note-actions'>
+        <button onClick={() => setShowPalette(!showPalette)}>
+          <span className='material-symbols-outlined' style={{ color: note.style.backgroundColor }}>
+            palette
+          </span>
+        </button>
+        {showPalette && (
+          <div className='color-palette'>
+            {colors.map((color) => (
+              <button
+                key={color}
+                className='color-option'
+                style={{ backgroundColor: color }}
+                onClick={() => handleColorChange(color)}
+              />
+            ))}
+          </div>
+        )}
+        {/* ... (other action buttons) */}
+      </div>
     </div>
   )
 }
