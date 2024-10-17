@@ -29,6 +29,17 @@
     background-color: transparent;
 }
 
+.note-add textarea[type="text"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: none;
+    font-size: 16px;
+    border: none;
+    background-color: transparent;
+    font-family: Roboto, sans-serif;
+}
+
 .note-add input[type="text"]:focus {
     outline: none;
 }
