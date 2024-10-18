@@ -1,6 +1,8 @@
 const { Link, Outlet } = ReactRouterDOM
 const { useState, useEffect } = React
 
+import { showErrorMsg, showSuccessMsg } from '../../../services/event-bus.service.js'
+
 import { MailFilter } from '../cmps/MailFilter.jsx'
 import { MailFolderList } from '../cmps/MailFolderList.jsx'
 import { MailList } from '../cmps/MailList.jsx'
@@ -39,9 +41,11 @@ export function MailIndex() {
       .remove(mailId)
       .then(() => {
         setMails((mails) => mails.filter((mail) => mail.id !== mailId))
+        showSuccessMsg(`Mail removed successfully!`)
       })
       .catch((err) => {
         console.log('err removing mail' + mailId, err)
+        showErrorMsg(`Problems removing mail (${mailId})`)
       })
   }
 
