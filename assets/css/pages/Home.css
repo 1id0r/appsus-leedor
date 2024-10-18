@@ -8,7 +8,7 @@
     height: calc(100vh - 66px);
     text-align: center;
     background-size: cover;
-    background-position: center; /* Center the background image */
+    background-position: center;
     background-repeat: no-repeat;
     background-image: url(/assets/img/home-img.jpg);
 
@@ -20,22 +20,22 @@
     display: flex;
     gap: 1rem;
     font-size: 10em;
-    letter-spacing: .5rem ;
+    letter-spacing: .5rem;
     text-transform: uppercase;
     transition: translate .8s;
 }
 
-.home h1 span{
+.home h1 span {
     display: inline-block;
     position: relative;
 }
 
-.home h1 span:first-child{
-    transform: translateY(-2rem); 
-    transition: transform 0.3s ease; 
+.home h1 span:first-child {
+    transform: translateY(-2rem);
+    transition: transform 0.3s ease;
 }
 
-.home h1 span:last-child::before{
+.home h1 span:last-child::before {
     content: '';
     position: absolute;
     top: 0;
@@ -46,7 +46,7 @@
     height: 1rem;
 }
 
-.home h1 span:first-child::before{
+.home h1 span:first-child::before {
     content: '';
     position: absolute;
     bottom: 0;
@@ -57,7 +57,7 @@
     height: 1rem;
 }
 
-.home h1 span:last-child{
+.home h1 span:last-child {
     font-size: 160px;
     transition: translate .8s;
 }
@@ -80,7 +80,6 @@
     cursor: pointer;
 }
 
-.home nav a img:last-of-type{
+.home nav a img:last-of-type {
     height: 25px;
 }
-
