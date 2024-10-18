@@ -8,11 +8,13 @@
 
 .note-edit {
     position: fixed;
+    width: 90%;
+    max-width: 600px;
     top: 50%;
     left: 50%;
     translate: -50% -50%;
     z-index: 10;
-    width: 600px;
+
     margin: 20px auto;
     padding: 15px;
     border-radius: 8px;
@@ -40,6 +42,18 @@
     margin-bottom: 10px;
     border: none;
     font-size: 16px;
+    background: none;
+}
+
+.note-edit textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: none;
+    font-size: 16px;
+    border: none;
+    background-color: transparent;
+    font-family: Roboto, sans-serif;
 }
 
 .edit-btn:hover {
