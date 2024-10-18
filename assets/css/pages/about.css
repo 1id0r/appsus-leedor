@@ -13,7 +13,6 @@
 .about h1 {
     font-size: 2.2rem;
     color: #ffc300;
-    /* Google's primary blue */
     margin-bottom: 20px;
     text-align: center;
 }
@@ -40,7 +39,7 @@
     margin-bottom: 10px;
 }
 
-.about li strong {}
+/* .about li strong {} */
 
 .about strong {
     color: #001d3d;
@@ -55,7 +54,7 @@
     text-decoration: underline;
 }
 
-/* Mobile Responsiveness */
+
 @media (max-width: 768px) {
     .about .about-page {
         padding: 20px;
@@ -131,5 +130,4 @@
 
 .social-links a:hover {
     color: #ffc300;
-    /* Change color on hover */
 }

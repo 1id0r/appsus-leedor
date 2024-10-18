@@ -98,34 +98,74 @@ function _createNotes() {
           backgroundColor: getRandomColor(),
         },
         info: {
-          title: '1',
-          txt: 'Fullstack Me Baby!',
+          title: 'Inspirational Quote',
+          txt: 'The only way to do great work is to love what you do. - Steve Jobs',
         },
       },
       {
-        id: 'n102',
-        createdAt: 1112222,
-        type: 'NoteTxt',
+        id: 'C92RD',
+        createdAt: 1729259500905,
+        type: 'NoteTodos',
+        isPinned: false,
+        style: {
+          backgroundColor: getRandomColor(),
+        },
+        info: {
+          title: 'Shopping List',
+          url: '',
+          todos: [
+            {
+              txt: 'Milk',
+              isDone: false,
+            },
+            {
+              txt: 'Eggs',
+              isDone: false,
+            },
+            {
+              txt: 'Cheese',
+              isDone: false,
+            },
+            {
+              txt: 'Burgers',
+              isDone: false,
+            },
+            {
+              txt: 'Chicken',
+              isDone: false,
+            },
+          ],
+        },
+      },
+      {
+        id: 'C92RD',
+        createdAt: 1729259500905,
+        type: 'NoteTodos',
         isPinned: true,
         style: {
           backgroundColor: getRandomColor(),
         },
         info: {
-          title: '1',
-          txt: 'Fullstack Me Baby!',
-        },
-      },
-      {
-        id: 'n103',
-        createdAt: 1112222,
-        type: 'NoteTxt',
-        isPinned: true,
-        style: {
-          backgroundColor: getRandomColor(),
-        },
-        info: {
-          title: '1',
-          txt: 'Fullstack Me Baby!',
+          title: 'Daily Tasks',
+          url: '',
+          todos: [
+            {
+              txt: 'Morning Run',
+              isDone: true,
+            },
+            {
+              txt: 'Team Standup Meeting',
+              isDone: false,
+            },
+            {
+              txt: 'Finish React Project',
+              isDone: true,
+            },
+            {
+              txt: 'Grocery Shopping',
+              isDone: false,
+            },
+          ],
         },
       },
       {
@@ -152,6 +192,19 @@ function _createNotes() {
         info: {
           title: '1',
           url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQfc4OHjLhcAzoGtn7Tw-ywGG_Wb-w3e4rjQ&s',
+        },
+      },
+      {
+        id: 'n105',
+        createdAt: 1112222,
+        type: 'NoteImg',
+        isPinned: false,
+        style: {
+          backgroundColor: getRandomColor(),
+        },
+        info: {
+          title: "Inspiration for the new app's user interface",
+          url: 'https://s3-alpha.figma.com/hub/file/4210100113/701f36a5-4b41-42b2-8e5f-e5b2039f6c73-cover.png',
         },
       },
     ]
