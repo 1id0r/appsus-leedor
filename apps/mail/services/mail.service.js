@@ -39,18 +39,18 @@ export const mailService = {
 
 function query(filterBy = {}, sortBy= {}) {
     return storageService.query(MAIL_KEY)
-        .then(mails => {
+    .then(mails => {
             if (filterBy.txt) {
                 const regExp = new RegExp(filterBy.txt, 'i')
                 mails = mails.filter(mail => regExp.test(mail.subject))
             }
             if (filterBy.status) {
                 switch (filterBy.status) {
-                    case 'inbox': return mails = mails.filter(mail => mail.from !== loggedInUser.email)
+                    case 'inbox': mails = mails.filter(mail => mail.from !== loggedInUser.email)
                         break;
                     case 'sent': mails = mails.filter(mail => mail.from === loggedInUser.email)
                         break;
-                    case 'trash': return mails
+                    case 'trash': mails
                         break;
                     case 'draft': mails = mails.filter(mail => !mail.sentAt)
                         break;
@@ -60,6 +60,7 @@ function query(filterBy = {}, sortBy= {}) {
                 mails = mails.filter(mail => mail.isStarred === filterBy.starred)
             }
             if (sortBy.date) {
+                console.log('here')
                 mails.sort((a, b) => (a.sentAt - b.sentAt) * sortBy.date)
             }
             if (sortBy.title) {
@@ -169,6 +170,7 @@ function _setNextPrevMailId(mail) {
 }
 
 function getStats() {
+    console.log('run')
     return query().then((mails) => {
         return mails.reduce((acc, mail) => {
             if (!mail.isRead) acc.isUnread++

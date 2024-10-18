@@ -71,15 +71,15 @@ export function About() {
       </p>
       <div className='team'>
         <div className='team-member'>
-          <img src='https://via.placeholder.com/150' alt='Lee Shavit' className='team-photo' />
+          <img src='assets/img/leeImg.jpg' alt='Lee Shavit' className='team-photo' />
           <div className='team-info'>
             <h3>Lee Shavit</h3>
-            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry</p>
+            <p>At 26, living in Tel Aviv, I’m driven by curiosity and the thrill of problem-solving. Currently immersed in full-stack development, I’m excited to turn ideas into code and craft solutions that make an impact."</p>
             <div className='social-links'>
-              <a href='#' target='_blank' rel='noopener noreferrer'>
+              <a href='https://www.linkedin.com/in/leeshavit10/' target='_blank' rel='noopener noreferrer'>
                 <img src='assets/img/linkedin2.svg' alt='github' />
               </a>
-              <a href='#' target='_blank' rel='noopener noreferrer'>
+              <a href='https://github.com/LeeShavit' target='_blank' rel='noopener noreferrer'>
                 <img src='assets/img/github.svg' alt='github' />
               </a>
             </div>
@@ -92,7 +92,7 @@ export function About() {
             <h3>Lidor Nissim</h3>
             <p>
               23 years old, I’m from Petah Tikva, Israel, with a strong passion for coding and a love for challenges.
-              I’m currently studying web development at Coding Academy
+              I’m currently studying web development at Coding Academy.
             </p>
             <div className='social-links'>
               <a href='https://www.linkedin.com/in/lidor-nissim-397009231/' target='_blank' rel='noopener noreferrer'>

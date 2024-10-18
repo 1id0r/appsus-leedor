@@ -15,6 +15,7 @@ import { BookIndex } from './apps/books/pages/BookIndex.jsx'
 import { BookDetails } from './apps/books/pages/BookDetails.jsx'
 import { BookEdit } from './apps/books/pages/BookEdit.jsx'
 import { Dashboard } from './apps/books/pages/Dashboard.jsx'
+import { UserMsg } from './cmps/UserMsg.jsx'
 
 export function App() {
 
@@ -22,24 +23,27 @@ export function App() {
     <Router>
       <section className='app'>
         <AppHeader />
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/about' element={<About />} />
-          <Route path='/mail' element={<MailIndex />}>
-            <Route path='/mail/compose' element={<MailCompose />} />
-          </Route>
-          <Route path='/mail/:mailId' element={<MailDetails />} />
-          <Route path='/note' element={<NoteIndex />}>
-            <Route path='/note/edit/:noteId' element={<NoteEdit />} />
-          </Route>
-          <Route path='/note/add' element={<NoteAdd />} />
-          <Route path='/book' element={<BookIndex />}>
-            <Route path='/book/edit/' element={<BookEdit />} />
-            <Route path='/book/edit/:bookId' element={<BookEdit />} />
-          </Route>
-          <Route path='/book/:bookId' element={<BookDetails />} />
-          <Route path='/book/Dashboard' element={<Dashboard />} />
-        </Routes>
+        <main>
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/about' element={<About />} />
+            <Route path='/mail' element={<MailIndex />}>
+              <Route path='/mail/compose' element={<MailCompose />} />
+            </Route>
+            <Route path='/mail/:mailId' element={<MailDetails />} />
+            <Route path='/note' element={<NoteIndex />}>
+              <Route path='/note/edit/:noteId' element={<NoteEdit />} />
+            </Route>
+            <Route path='/note/add' element={<NoteAdd />} />
+            <Route path='/book' element={<BookIndex />}>
+              <Route path='/book/edit/' element={<BookEdit />} />
+              <Route path='/book/edit/:bookId' element={<BookEdit />} />
+            </Route>
+            <Route path='/book/:bookId' element={<BookDetails />} />
+            <Route path='/book/Dashboard' element={<Dashboard />} />
+          </Routes>
+        </main>
+        <UserMsg />
       </section>
     </Router>
   )

@@ -1,16 +1,16 @@
 const { useState, useEffect } = React
 
-const {  useNavigate ,useOutletContext , useSearchParams} = ReactRouterDOM
+const { useNavigate, useOutletContext, useSearchParams } = ReactRouterDOM
 
 import { mailService } from "../services/mail.service.js"
 import { showErrorMsg, showSuccessMsg } from '../../../services/event-bus.service.js'
 
-export function MailCompose({}) {
+export function MailCompose({ }) {
 
-    const [searchParams, setSearchParams]= useSearchParams()
+    const [searchParams, setSearchParams] = useSearchParams()
     const [mailToComp, setMailtoComp] = useState(mailService.getNewMailFromSearchParams(searchParams))
     const navigate = useNavigate()
-    const onUpdateMail= useOutletContext()
+    const { onUpdateMail } = useOutletContext()
 
 
     function handleChange({ target }) {
@@ -37,6 +37,7 @@ export function MailCompose({}) {
                 showSuccessMsg('mail sent successfully')
             })
             .catch(err => {
+                console.log(err)
                 showErrorMsg(`Couldn't send mail`)
             })
             .finally(() => {
