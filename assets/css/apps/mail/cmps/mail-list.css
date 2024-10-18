@@ -48,10 +48,6 @@
     background-color: var(--mail-unread-color);
  }
 
- /* li div:first-of-type{ 
-  width: 65px ; 
- } */
-
  .mail-list li button {
     display: none;
     background: none;
@@ -77,9 +73,19 @@
     background-color: #00000010;
  }
 
+ li.mail div:first-of-type{ 
+   display: flex;
+   align-items: center;
+  width: 65px ; 
+ }
 
  .mail-list .material-symbols-outlined {
     font-size: 18px;
+ }
+
+ .mail-list .material-symbols-outlined i{
+   transform: translateY(-3px);
+    font-size: 16px;
  }
 
  .mail-list .material-symbols-outlined {

@@ -13,57 +13,27 @@ export function MailIndex() {
   const [sortBy, setSortBy] = useState(mailService.getDefaultSort())
   const [stats, setStats] = useState(null)
 
+
   useEffect(() => {
     loadMails()
-  }, [filterBy, sortBy])
-  useEffect(() => {
-    loadMails()
-    loadStats(mails)
   }, [filterBy, sortBy])
 
-  function loadMails() {
-    mailService
-      .query(filterBy)
-      .then((mails) => {
-        setMails(mails)
-        loadStats(mails)
-      })
-      .catch((err) => {
-        console.log('err loading mails', err)
-      })
-  }
   function loadMails() {
     mailService
       .query(filterBy, sortBy)
       .then((mails) => {
         setMails(mails)
-        loadStats(mails)
+        loadStats()
       })
       .catch((err) => {
         console.log('err loading mails', err)
       })
   }
 
-  function loadStats(mails) {
-    setStats(mailService.getStats(mails))
-  }
-  function loadStats(mails) {
-    if (!mails) return
-    setStats(mailService.getStats(mails))
+  function loadStats() {
+    mailService.getStats().then(setStats)
   }
 
-  function onRemoveMail(mailId) {
-    mailService
-      .remove(mailId)
-      .then(() => {
-        setMails((mails) => {
-          mails.filter((mail) => mail.id !== mailId)
-        })
-      })
-      .catch((err) => {
-        console.log('err removing mail' + mailId, err)
-      })
-  }
   function onRemoveMail(mailId) {
     mailService
       .remove(mailId)
@@ -76,42 +46,51 @@ export function MailIndex() {
   }
 
   function onToggleRead(mail) {
-    console.log(mail)
-    mail.isRead = !mail.isRead
+    const updatedMail = { ...mail, isRead: !mail.isRead }
     mailService
-      .save(mail)
-      .then((updatedMail) => {
-        const idx = mails.findIndex((prevMail) => prevMail.id === mail.id)
-        setMails((prevMails) => {
-          const newMails = [...prevMails]
-          newMails[idx] = updatedMail
-          return newMails
-        })
-        loadStats(mails)
-      })
-      .catch((err) => {
-        console.log('err editing mail' + mail.id, err)
-      })
-  }
+       .save(updatedMail)
+       .then((updatedMail) => {
+          const idx = mails.findIndex((prevMail) => prevMail.id === updatedMail.id)
+          setMails((prevMails) => {
+             const newMails = [...prevMails]
+             newMails[idx] = updatedMail
+             return newMails
+          })
+          loadStats()
+       })
+       .catch((err) => {
+          console.log('err toggling read/unread mail' + updatedMail.id, err)
+       })
+ }
+ 
+ function onToggleStarred(mail) {
+    const updatedMail = { ...mail, isStarred: !mail.isStarred }
+    mailService
+       .save(updatedMail)
+       .then((updatedMail) => {
+          const idx = mails.findIndex((prevMail) => prevMail.id === updatedMail.id)
+          setMails((prevMails) => {
+             const newMails = [...prevMails]
+             newMails[idx] = updatedMail
+             return newMails
+          })
+          loadStats()
+       })
+       .catch((err) => {
+          console.log('err starring mail' + updatedMail.id, err)
+       })
+ }
+ 
 
   function onSetFilter(filterByToEdit) {
     if (!filterByToEdit) setFilterBy(mailService.getDefaultFilter())
     setFilterBy((filterBy) => ({ ...filterBy, ...filterByToEdit }))
   }
 
-  function onSetSort(sort) {
-    setSortBy((sortBy) => {
-      const newSort = sortBy
-      if (!newSort[sort]) newSort[sort] = 1
-      else newSort[sort] *= -1
-      console.log(newSort)
-      return newSort
-    })
-  }
-
-  function onSetSort(sort) {
+  function onSetSort(sortKey) {
     const clearSort = mailService.getDefaultSort()
-    setSortBy((sortBy) => ({ ...clearSort, [sort]: !sortBy[sort] ? 1 : -sortBy[sort] }))
+    const newSort={ ...clearSort, [sortKey]: !sortBy[sortKey] ? 1 : -sortBy[sortKey] }
+    setSortBy(newSort)
   }
 
   function onUpdateMail(savedMail) {
@@ -137,12 +116,13 @@ export function MailIndex() {
             mails={mails}
             onRemoveMail={onRemoveMail}
             onToggleRead={onToggleRead}
+            onToggleStarred={onToggleStarred}
             sortBy={sortBy}
             onSetSort={onSetSort}
           />
         </div>
         <nav className='side-nav'></nav>
-        <Outlet context={{onUpdateMail}} />
+        <Outlet context={{ onUpdateMail }} />
       </div>
     </div>
   )
