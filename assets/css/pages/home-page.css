@@ -10,7 +10,7 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-image: url(/assets/img/home-img.jpg);
+    background-image: url('/assets/img/home-img.jpg');
 
     padding-inline: 10%;
     font-family: Roboto, Arial, Helvetica, sans-serif;
