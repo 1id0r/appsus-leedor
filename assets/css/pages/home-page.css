@@ -71,15 +71,15 @@
 .home nav {
     display: flex;
     justify-content: center;
-    gap: 2em;
+    gap: 1.5em;
 }
 
 .home nav a img {
     display: block;
-    height: 20px;
+    height: 1px;
     cursor: pointer;
 }
 
 .home nav a img:last-of-type {
-    height: 25px;
+    height: 20px;
 }

@@ -28,6 +28,11 @@ header {
     height: 20px;
 }
 
+.app-header nav a img {
+    height: 16px;
+}
+
+
 
 .app-header nav a:active {
     color: #800080;
