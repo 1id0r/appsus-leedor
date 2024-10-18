@@ -124,7 +124,6 @@ export function NoteAdd({ loadNotes }) {
               }
               onChange={handleChange}
             />
-
             <div className='note-add-actions'>
               <div className='note-type-buttons'>
                 <button type='button' onClick={() => handleTypeChange('NoteTxt')}>

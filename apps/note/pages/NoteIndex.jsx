@@ -1,6 +1,6 @@
 const { useState, useEffect } = React
 const { Outlet, useNavigate } = ReactRouterDOM
-
+import { Moon, Sun } from 'lucide-react'
 import { showErrorMsg, showSuccessMsg } from '../../../services/event-bus.service.js'
 import { NoteList } from '../cmps/NoteList.jsx'
 import { NoteFilter } from '../cmps/NoteFilter.jsx'
@@ -8,6 +8,7 @@ import { noteService } from '../services/note.service.js'
 import { NoteAdd } from '../cmps/NoteAdd.jsx'
 export function NoteIndex() {
   const [notes, setNotes] = useState()
+  const [darkMode, setDarkMode] = useState(false)
   const [filterBy, setFilterBy] = useState(noteService.getDefaultFilter())
   const navigate = useNavigate()
 
@@ -15,6 +16,14 @@ export function NoteIndex() {
     loadNotes()
     console.log(notes)
   }, [filterBy])
+
+  useEffect(() => {
+    document.body.classList.toggle('dark-mode', darkMode)
+  }, [darkMode])
+
+  function toggleDarkMode() {
+    setDarkMode((prevMode) => !prevMode)
+  }
 
   function loadNotes() {
     noteService.query(filterBy).then(setNotes)
@@ -106,7 +115,14 @@ export function NoteIndex() {
 
   if (!notes) return <div>Loading</div>
   return (
-    <React.Fragment>
+    <div className={darkMode ? 'dark' : ''}>
+      <button onClick={toggleDarkMode} className={`dark-btn`}>
+        {darkMode ? (
+          <img src='./assets/img/dark-mode.svg' alt='Books' />
+        ) : (
+          <img src='./assets/img/light-mode.svg' alt='Books' />
+        )}
+      </button>
       <div className='filter-container'>
         <NoteFilter onToggleTodo={onToggleTodo} filterBy={filterBy} onSetFilter={onSetFilter} />
       </div>
@@ -121,6 +137,6 @@ export function NoteIndex() {
         onRemoveNote={onRemoveNote}
         notes={notes}
       />
-    </React.Fragment>
+    </div>
   )
 }
