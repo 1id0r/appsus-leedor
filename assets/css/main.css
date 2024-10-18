@@ -10,10 +10,8 @@
 /* @import './basics/layout.css'; */
 
 /* Pages */
-@import './pages/home.css';
+@import './pages/Home.css';
 @import './pages/about.css';
-
-
 
 /* Cmps */
 
@@ -51,4 +49,3 @@
 @import './apps/book/cmps/book-preview.css';
 @import './apps/book/cmps/book-filter.css';
 @import './apps/book/cmps/book-add.css';
-
