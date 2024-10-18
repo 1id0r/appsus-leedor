@@ -2,36 +2,31 @@
     margin: 0;
 }
 
-.mail-preview {
-    display: flex;
+.mail-list li .mail-preview {
+    display: grid;
+    grid-template-columns: 140px 1fr 80px;
 
     width: calc(100% - 60px);
     font-weight: 100;
     margin-inline-start: .5em;
 }
 
-.mail-list li:hover .mail-preview {
-    width: calc(100% - 125px)
-}
-
 .mail-preview h4 {
+    display: inline;
     font-weight: 200;
     font-size: 14px;
-}
-
-.mail-preview h4:first-child {
-    width: 140px;
 }
 
 .mail-preview h4:nth-child(2) {
     overflow: hidden;
 }
+
 .mail-preview:nth-child(2) span {
-    font-weight: 100;
+    overflow: hidden;
+    color: rgba(0, 0, 0, 0.809);
 }
 
 .mail-list li .mail-preview h4:last-child {
-    width: 80px;
     text-align: end;
 }
 
