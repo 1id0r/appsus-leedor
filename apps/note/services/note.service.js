@@ -177,7 +177,7 @@ function _createNotes() {
           backgroundColor: getRandomColor(),
         },
         info: {
-          title: '1',
+          title: 'Video to watch later',
           url: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
         },
       },
@@ -190,7 +190,7 @@ function _createNotes() {
           backgroundColor: getRandomColor(),
         },
         info: {
-          title: '1',
+          title: 'Remember to edit the photo',
           url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQfc4OHjLhcAzoGtn7Tw-ywGG_Wb-w3e4rjQ&s',
         },
       },
