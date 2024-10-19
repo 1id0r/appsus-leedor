@@ -20,5 +20,7 @@ body:has(.dark-btn).dark-mode {
 .dark-btn {
     border: none;
     background: none;
+    position: relative;
+    top: 10px;
 
 }

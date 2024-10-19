@@ -7,11 +7,11 @@
     .mail-main {
         grid-template-columns: 10px 1fr 10px;
     }
-    
+
     .mail-main:has(.wide) {
         grid-template-columns: 80px 1fr 10px;
     }
-    
+
 
     .mail-filter {
         position: relative;
@@ -73,7 +73,7 @@
     .mail-main:has(.wide) {
         grid-template-columns: 256px 1fr 10px;
     }
-    
+
     .mail-filter {
         position: absolute;
         width: calc(100vw - 460px);

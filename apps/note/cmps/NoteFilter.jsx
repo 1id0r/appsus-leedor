@@ -28,7 +28,7 @@ export function NoteFilter({ filterBy, onSetFilter }) {
   return (
     <section className='note-filter'>
       <button>
-        <span class='material-symbols-outlined'>search</span>
+        <span className='material-symbols-outlined'>search</span>
       </button>
       <input onChange={handleChange} placeholder='search' type='text' name='title' id='title' value={title}></input>
     </section>

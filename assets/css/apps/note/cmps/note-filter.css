@@ -43,9 +43,15 @@
 }
 
 
-@media (max-width: 768px) {
+@media (max-width: 640px) {
     .note-filter {
-        max-width: 100%;
-        padding: 0 16px;
+        position: relative;
+        width: calc(100vw - 70px);
+        background-color: var(--mail-search);
+        height: 48px;
+        line-height: 60px;
+        border-radius: 24px;
+        top: 1px;
+        left: 30px;
     }
 }

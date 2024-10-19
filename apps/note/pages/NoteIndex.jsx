@@ -118,9 +118,9 @@ export function NoteIndex() {
     <div className={darkMode ? 'dark' : ''}>
       <button onClick={toggleDarkMode} className={`dark-btn`}>
         {darkMode ? (
-          <img src='./assets/img/dark-mode.svg' alt='Books' />
+          <img src='./assets/img/lightmode.svg' alt='Books' />
         ) : (
-          <img src='./assets/img/light-mode.svg' alt='Books' />
+          <img src='./assets/img/darkmode.svg' alt='Books' />
         )}
       </button>
       <div className='filter-container'>
