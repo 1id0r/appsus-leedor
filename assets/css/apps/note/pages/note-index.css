@@ -1,5 +1,5 @@
 /* Dark mode styles */
-body.dark-mode {
+body:has(.dark-btn).dark-mode {
     background-color: #202124;
     color: #646464;
     transition: background-color 0.3s ease, color 0.3s ease;
