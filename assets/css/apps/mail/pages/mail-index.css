@@ -1,5 +1,7 @@
 .mail-main {
     display: grid;
     background-color: var(--main-mail-bg-color);
-    transition: all .3s
+    transition: all .3s;
+
+    height: calc(100vh - 66px)
 }
