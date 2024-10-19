@@ -3,7 +3,7 @@ const { Link, NavLink } = ReactRouterDOM
 export function Home() {
   return (
     <React.Fragment>
-      <img src='./assets/img/home-img.jpg' alt='Books' />
+      <img src='./assets/img/home-img.png' alt='Books' />
       <section className='home'>
         <h1>
           <span>Lee</span>
