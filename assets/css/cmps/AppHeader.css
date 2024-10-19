@@ -29,7 +29,7 @@ header {
 }
 
 .app-header nav a img {
-    height: 16px;
+    scale: 1;
 }
 
 
