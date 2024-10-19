@@ -33,7 +33,7 @@ body:has(.mail-main) .app-header .logo{
 }
 
 .app-header nav a img {
-    height: 16px;
+    scale: 1;
 }
 
 
