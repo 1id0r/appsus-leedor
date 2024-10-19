@@ -59,32 +59,29 @@ export function MailDetails({ onToggleStarred }) {
     return (
         <section className="mail-details">
             <div className="top-btns">
-                <button><span className="material-symbols-outlined">archive</span></button>
-                <button><span className="material-symbols-outlined">report</span></button>
+                <Link to='/mail/'><span class="material-symbols-outlined">arrow_back</span></Link>
                 <button onClick={() => { onRemoveMail(mail.id) }}><span className="material-symbols-outlined">delete</span></button>
-                |
                 <button><span className="material-symbols-outlined">mark_email_unread</span></button>
-                <button><span className="material-symbols-outlined">schedule</span></button>
                 <button onClick={() => onSaveAsNote()}><img src='assets/img/keep.svg' alt='keep' /></button>
-                |
                 <button><span className="material-symbols-outlined">drive_file_move</span></button>
                 <button><span className="material-symbols-outlined">label</span></button>
-                <button><span className="material-symbols-outlined">more_vert</span></button>
-                <button ><Link to={`/mail/${mail.prevMailId}`}><span className="material-symbols-outlined">chevron_left
-                </span></Link></button>
-                <button ><Link to={`/mail/${mail.nextMailId}`}><span className="material-symbols-outlined">chevron_right
-                </span></Link></button>
-                <Link to='/mail/'><span class="material-symbols-outlined">undo</span></Link>
+                <button onClick={()=>window.print()}><span className="material-symbols-outlined">print</span></button>
+                <Link to={`/mail/${mail.prevMailId}`}><span className="material-symbols-outlined">chevron_left
+                </span></Link>
+                <Link to={`/mail/${mail.nextMailId}`}><span className="material-symbols-outlined">chevron_right
+                </span></Link>
             </div>
             <main>
                 <h2>{subject}</h2>
                 <div className="sub-header">
                     <h5>
                         <span className="from-preview">{from[0]}</span>
-                        <span>{from}</span>
+                        <span>
+                            <p>{from}</p>
+                            <p>to {to}</p>
+                        </span>
                     </h5>
                     <p>
-                        <span>{to}</span>
                         <span>{date.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })} {date.getHours()}:{date.getMinutes()}</span>
                         <button onClick={() => { onToggleStarred(mail) }} >
                             {mail.isStarred
@@ -99,7 +96,6 @@ export function MailDetails({ onToggleStarred }) {
             <aside>
                 <button><span className="material-symbols-outlined">reply</span> Reply</button>
                 <button><span className="material-symbols-outlined">forward</span> Forward</button>
-                <button><span className="material-symbols-outlined">sentiment_satisfied</span></button>
             </aside>
         </section >
     )

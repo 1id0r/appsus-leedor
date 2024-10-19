@@ -1,19 +1,21 @@
-.mail-filter{
-    position: absolute;
+.mail-filter {
     background-color: var(--mail-search);
-    width: calc(100vw - 460px) ;
     height: 48px;
-    line-height: 60px;
+    line-height: 20px;
     border-radius: 24px;
-    top: 8px;
+    z-index: 1;
 }
 
-.mail-filter:has(input:focus){
+.mail-filter:has(input:focus) {
     background-color: var(--mail-unread-color);
-
 }
 
-.mail-filter button{
+.mail-filter:has(.mail-filter-extended) {
+    background-color: var(--mail-unread-color);
+    border-radius: 1em 1em 0 0;
+}
+
+.mail-filter button {
     width: 36px;
     height: 36px;
     line-height: 0;
@@ -27,30 +29,101 @@
     margin: 6px;
 }
 
-.mail-filter button:first-child{
+.mail-filter button:first-child {
     background-color: #00000010;
 }
 
-.mail-filter button:hover{
+.mail-filter button:hover {
     background-color: #00000010;
 
 }
 
-.mail-filter input{
-    width: calc(100% - 100px);
+.mail-filter input {
     height: 20px;
     font-size: 1em;
 
     background: none;
     border: none;
+}
+
+.mail-filter input:not(.mail-filter-extended input) {
+    width: calc(100% - 100px);
     transform: translateY(-6px);
 }
 
-.mail-filter input:focus{
+.mail-filter input:focus {
     outline: none;
 }
 
-.mail-filter button.filter-clear{
+.mail-filter button.filter-clear {
     position: absolute;
     right: 48px;
+}
+
+.mail-filter-extended {
+    display: grid;
+    grid-template-columns: 120px 1fr;
+    align-items: center;
+
+    position: absolute;
+    top: 100%;
+    width: 100%;
+
+    background-color: inherit;
+    border-radius: 0 0 1em 1em;
+    padding: 24px;
+}
+
+.mail-filter-extended > *:not(div) {
+    margin-bottom: 20px;
+}
+.mail-filter-extended label {
+    font-weight: 200;
+    font-size: 0.875em;
+    color: rgba(0, 0, 0, 0.809);
+}
+
+.mail-filter-extended input {
+    font-weight: 200;
+    font-size: 0.875em;
+    
+    border-bottom: 1px solid lightgray;
+}
+
+.mail-filter-extended input:focus {
+    border-bottom: 1px solid #1a73e8;
+}
+
+.mail-filter-extended div:not(.filter-back-drop) {
+    justify-self: end;
+    grid-column: 2/3;
+}
+
+.mail-filter-extended div button {
+    width: 84px;
+    height: 35px;
+    color: rgba(0, 0, 0, 0.809);
+    border: 0;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.mail-filter-extended div button:first-child {
+    background: none;
+}
+
+.mail-filter-extended div button:last-child {
+    color: white;
+    background-color: #0b57d0;
+}
+
+body:has(.mail-compose) .back-drop {
+    cursor: pointer;
+}
+
+.filter-back-drop {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    cursor: pointer;
 }

@@ -37,30 +37,48 @@ export const mailService = {
     getNewMailFromSearchParams,
 }
 
-function query(filterBy = {}, sortBy= {}) {
+function query(filterBy = {}, sortBy = {}) {
     return storageService.query(MAIL_KEY)
-    .then(mails => {
-            if (filterBy.txt) {
-                const regExp = new RegExp(filterBy.txt, 'i')
+        .then(mails => {
+            if (filterBy.subjectTxt) {
+                const regExp = new RegExp(filterBy.subjectTxt, 'i')
                 mails = mails.filter(mail => regExp.test(mail.subject))
+            }
+            if (filterBy.bodyTxt) {
+                const regExp = new RegExp(filterBy.bodyTxt, 'i')
+                mails = mails.filter(mail => regExp.test(mail.body))
             }
             if (filterBy.status) {
                 switch (filterBy.status) {
-                    case 'inbox': mails = mails.filter(mail => mail.from !== loggedInUser.email)
+                    case 'inbox': mails = mails.filter(mail => (mail.from !== loggedInUser.email && !mail.removedAt))
                         break;
-                    case 'sent': mails = mails.filter(mail => mail.from === loggedInUser.email)
+                    case 'sent': mails = mails.filter(mail => (mail.from === loggedInUser.email && mail.sentAt))
                         break;
-                    case 'trash': mails
+                    case 'trash': mails = mails.filter(mail => mail.removedAt)
                         break;
                     case 'draft': mails = mails.filter(mail => !mail.sentAt)
                         break;
                 }
             }
-            if (filterBy.starred) {
-                mails = mails.filter(mail => mail.isStarred === filterBy.starred)
+            if (filterBy.to) {
+                const regExp = new RegExp(filterBy.to, 'i')
+                mails = mails.filter(mail => regExp.test(mail.to))
+            }
+            if (filterBy.from) {
+                const regExp = new RegExp(filterBy.from, 'i')
+                mails = mails.filter(mail => regExp.test(mail.from))
+            }
+            if (filterBy.date) {
+                const day = new Date(filterBy.date).toLocaleDateString('en-US', { year: 'numeric', month: 'numeric', day: 'numeric' })
+                mails = mails.filter(mail => {
+                    const mailDay = new Date(mail.sentAt).toLocaleDateString('en-US', { year: 'numeric', month: 'numeric', day: 'numeric' })
+                    return (day === mailDay)
+                })
+            }
+            if (filterBy.isStarred) {
+                mails = mails.filter(mail => mail.isStarred === filterBy.isStarred)
             }
             if (sortBy.date) {
-                console.log('here')
                 mails.sort((a, b) => (a.sentAt - b.sentAt) * sortBy.date)
             }
             if (sortBy.title) {
@@ -83,8 +101,6 @@ function save(mail) {
     if (mail.id) {
         return storageService.put(MAIL_KEY, mail)
     } else {
-        mail.createdAt = mail.sentAt = Date.now()
-        mail.from = loggedInUser.email
         return storageService.post(MAIL_KEY, mail)
     }
 }
@@ -96,11 +112,15 @@ function getEmptyMail(createdAt = '', subject = '', body = '', from = '', isRead
 
 function getDefaultFilter() {
     return {
-        status: 'inbox', // 'inbox/sent/trash/draft'
-        txt: '', // no need to support complex text search
-        isRead: '', // (optional property, if missing: show all)
-        isStarred: '', // (optional property, if missing: show all)
-        labels: [] // has any of the labels }
+        status: 'inbox',
+        subjectTxt: '',
+        bodyTxt: '',
+        isRead: '',
+        isStarred: '',
+        labels: [],
+        from: '',
+        to: '',
+        date: '',
     }
 }
 
@@ -110,8 +130,6 @@ function getDefaultSort() {
         title: '',
     }
 }
-
-
 
 function _createMails() {
     let mails = utilService.loadFromStorage(MAIL_KEY)
@@ -170,13 +188,13 @@ function _setNextPrevMailId(mail) {
 }
 
 function getStats() {
-    console.log('run')
     return query().then((mails) => {
         return mails.reduce((acc, mail) => {
-            if (!mail.isRead) acc.isUnread++
+            if (!mail.isRead && mail.from !== loggedInUser.email && !mail.removedAt) acc.isUnread++
             if (!mail.sentAt) acc.draft++
+            if (mail.removedAt) acc.trash++
             if (mail.isStarred) acc.starred++
-            if (mail.from === loggedInUser.email) acc.sent++
+            if (mail.from === loggedInUser.email && mail.sentAt) acc.sent++
             return acc
         }, { isUnread: 0, draft: 0, trash: 0, starred: 0, sent: 0 })
     })
@@ -185,9 +203,10 @@ function getStats() {
 function getNewMailFromSearchParams(searchParams) {
     const subject = searchParams.get('subject') || ''
     const body = searchParams.get('body') || ''
-    const mail = getEmptyMail()
-    mail.subject = subject
-    mail.body = body
+    const mail = { ...getEmptyMail(), subject, body, from: loggedInUser.email, isRead: true }
+
+    const id = searchParams.get('id') || ''
+    if (id) mail.id = id
 
     return mail
 }

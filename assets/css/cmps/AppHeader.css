@@ -4,6 +4,10 @@ header {
     color: white;
 }
 
+body:has(.mail-main) .app-header .logo{
+    margin-inline-start: 50px;
+}
+
 .app-header {
     display: flex;
     justify-content: space-between;

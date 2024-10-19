@@ -18,8 +18,8 @@
     gap: 0.5em;
 }
 
-.book-filter label {
-    font-weight: 500;
+.book-filter label, .book-filter input {
+    font-weight: 200;
     color: #5f6368;
     align-self: center;
 }
