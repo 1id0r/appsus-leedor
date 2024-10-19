@@ -5,7 +5,7 @@ export function MailFolderList({ onSetFilter, stats }) {
 
     function onChooseFolder(val) {
         if (typeof val === 'string') {
-            onSetFilter({ status: val })
+            onSetFilter({ status: val,  isStarred: false })
         } else {
             onSetFilter({ isStarred: val })
         }

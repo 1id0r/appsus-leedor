@@ -1,4 +1,4 @@
-const { useState, useEffect } = React
+const { useState, useEffect, useRef } = React
 
 const { useNavigate, useOutletContext, useSearchParams } = ReactRouterDOM
 
@@ -11,7 +11,14 @@ export function MailCompose({ }) {
     const [mailToComp, setMailtoComp] = useState(mailService.getNewMailFromSearchParams(searchParams))
     const navigate = useNavigate()
     const { onUpdateMail } = useOutletContext()
+    const intervalRef = useRef()
 
+    useEffect(() => {
+        intervalRef.current = setInterval(() => {
+            draftMail()
+        }, 5000)
+        return () => clearInterval(intervalRef.current)
+    }, [mailToComp])
 
     function handleChange({ target }) {
         const field = target.name
@@ -28,9 +35,21 @@ export function MailCompose({ }) {
         }
         setMailtoComp(prevMailToComp => ({ ...prevMailToComp, [field]: value }))
     }
+    
+    function draftMail(){
+        mailService.save(mailToComp)
+            .then(savedMail => {
+                setMailtoComp(savedMail)
+            })
+            .catch(err => {
+                console.log(err)
+                showErrorMsg(`Couldn't draft mail`)
+            })
+    }
 
     function onSaveMail(ev) {
         ev.preventDefault()
+        mailToComp.sentAt = Date.now()
         mailService.save(mailToComp)
             .then(savedMail => {
                 onUpdateMail(savedMail)
@@ -41,6 +60,7 @@ export function MailCompose({ }) {
                 showErrorMsg(`Couldn't send mail`)
             })
             .finally(() => {
+                clearInterval(intervalRef.current)
                 navigate('/mail')
             })
     }
@@ -49,7 +69,7 @@ export function MailCompose({ }) {
         navigate('/mail')
     }
 
-    if (!mailToComp) return <div className="mail-compose">Loading...</div>
+    if (!mailToComp) return <div><img src='assets/img/loader.svg' alt='Books' /></div>
 
     return (
         <React.Fragment>

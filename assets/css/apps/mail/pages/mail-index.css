@@ -1,16 +1,5 @@
 .mail-main {
-    display: flex;
+    display: grid;
     background-color: var(--main-mail-bg-color);
-}
-
-.mail-folders {
-    width: 256px;
-}
-
-.side-nav {
-    width: 10px;
-}
-
-.mail-content {
-    width: 100%;
+    transition: all .3s
 }

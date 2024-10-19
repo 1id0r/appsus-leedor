@@ -1,22 +1,28 @@
-.mail-details button {
-    background: none;
+.mail-details .top-btns{
+    display: flex;
+    justify-content: start;
+    align-items: center;
 }
-.mail-details button:not(aside button) {
+
+.mail-details button:not(aside button), .top-btns a {
+    background: none;
     width: 40px;
     height: 40px;
-    font-size: 14px;
-    
+    text-align: center;
     border: 0;
     border-radius: 50%;
 }
+
+.mail-details .top-btns a{
+    padding-top: 8px;
+}
+
 .mail-details button img{
     width: 1.2em;
     height: 1.3em;
 }
-.mail-details button span.material-symbols-outlined {
-    font-size: 1.25em;
-}
-.mail-details button:hover {
+
+.mail-details button:hover , a:hover {
     background-color: var(--mail-hovered);
 }
 
@@ -34,8 +40,17 @@
     display: flex;
     align-items: center;
 }
+.mail-details .sub-header h5 span p{
+    font-size: .8rem;
+    margin: 6px;
+}
 .mail-details .sub-header h5 span:not(.from-preview){
     font-size: 1rem;
+}
+
+.mail-details .sub-header p{
+    display: flex;
+    align-items: center;
 }
 
 .from-preview{
@@ -67,12 +82,13 @@
     align-items: center;
     gap: .6em;
 
-    font-size: 1em;
+    font-size: .8em;
     text-align: center;
-    color: var(--mail-dark);
+    color: rgba(0, 0, 0, 0.8);
+    background-color: var(--mail-unread);
 
-    padding: .4em .8em;
-    border: 1px solid var(--mail-dark);
+    padding: .4em 1em .4em .8em;
+    border: 1px solid rgba(0, 0, 0, 0.4);
     border-radius: 1.5em;
     margin-block-start: .4em;
 }
